@@ -1,0 +1,181 @@
+﻿@using Entities;
+@model Entities.Usuario
+
+<h3>Cadastro de Usuário</h3>
+
+<fieldset>
+    <form data-bind="with:Usuario">
+        <div class="well">
+            <div class="row">
+                <div class="form-group col-md-4" data-bind="validationElement: Login">
+                    <label>Login</label>
+                    <input type="text" class="form-control" data-bind="value:Login" placeholder="Digite seu Login">
+                </div>
+
+                <div class="form-group col-md-4" data-bind="validationElement: Email">
+                    <label>Email</label>
+                    <input type="text" class="form-control" placeholder="Digite seu email" data-bind="value:Email">
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="form-group col-md-12">
+                    <label>Empresa</label>
+                    <select class="form-control" data-bind="options:$parent.ListaEmpresa, optionsValue:'ID', optionsText: 'Nome',value:ID_Empresa, optionsCaption: 'Selecione a Empresa'"></select>
+                </div>
+            </div>
+
+            <div class="row ">
+
+                <div class="form-group col-md-4" data-bind="validationElement: ID_Grupo,validationElement: Supervisor">
+                    <label>Grupo</label>
+                    <select class="form-control" data-bind="options:$parent.ListaGrupo, optionsText: 'Descricao',optionsValue:'ID',value:ID_Grupo,optionsCaption: 'Selecione o Grupo'"></select>
+                </div>
+
+                <div>
+                    <div class="form-group col-md-4 ">
+                        <label class="checkbox"><input type="checkbox" data-bind="checked:Supervisor">Supervisor</label>
+                    </div>
+
+                </div>
+
+            </div>
+
+            </br>
+            <div>
+
+                <fieldset>
+                    <table class="table table-bordered table-hover dataTable no-footer">
+                        <thead>
+                            <tr style="background-color: #8fcffa;">
+                                <th class="col-sm-3 center">PROJETO</th>
+                                <th class="col-sm-3 center">ACESSO</th>
+                            </tr>
+                        </thead>
+                        <tbody data-bind='foreach:ListaProjeto'>
+                            <tr>
+                                <td data-bind="text:Descricao " class="center"></td>
+                                <td class="center">
+                                    <input type="checkbox" data-bind="checked: Status">
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </fieldset>
+
+            </div>
+
+            </br>
+            <div class="row">
+                <div class="form-group col-md-12">
+                    <button type="button" class="btn btn-primary" data-bind="click:$parent.salva_usuario">Salvar</button>
+                </div>
+            </div>
+
+    </form>
+
+
+</fieldset>
+
+<div>
+    @Html.ActionLink("Voltar", "Index", null, new { @class = "btn btn-default btn-sm" })
+</div>
+
+@section Scripts {
+
+    <script>
+
+        var parsedJSON = @Html.Raw(Json.Encode(Model));
+        var ScreenModel = function  () {
+
+            self = this;
+            self.Usuario = new usuarioModel(parsedJSON);
+
+            self.ListaEmpresa = ko.observableArray();
+            self.ListaEmpresa = @Html.Raw(Json.Encode(Model.ListaEmpresa));            
+
+            self.ListaGrupo = ko.observableArray();
+            self.ListaGrupo = @Html.Raw(Json.Encode(Model.ListaGrupo));
+
+            
+          
+
+      
+
+            self.salva_usuario =  function () {               
+                $.ajax({
+                    url: '@Url.Action("Edit")',
+                    type: 'post',
+                    dataType: 'json',
+                    data:ko.toJSON(self.Usuario),
+                    contentType: 'application/json',
+                    success: function (data) {
+                        if(screenModel.ID == 0)
+                        {
+                            controle.showSuccessPopup('USUARIO', 'Usuario Cadastrado com sucesso!','@Url.Action("Index")');
+                        }
+                        else
+                        {
+                            controle.showSuccessPopup('USUARIO', 'Usuario alterado com sucesso!','@Url.Action("Index")');
+                        }
+                    },
+
+                });
+
+            };
+
+        };
+
+        //Model
+
+        var usuarioModel = function (usuario)
+        {
+            var self = this;
+            self.ID = ko.observable(usuario.ID);
+            self.ID_Grupo=ko.observable(usuario.ID_Grupo); //== null ? false : self.ID_Grupo
+            self.ID_Empresa=ko.observable(usuario.ID_Empresa);
+            self.Login = ko.observable(usuario.Login).extend({required:true});
+            self.Supervisor = ko.observable(usuario.Supervisor);//== null ? false : self.Supervisor
+            self.Email = ko.observable(usuario.Email).extend({required:true,email:true, pattern: { message: 'Email valido!'}});
+            self.ListaProjeto = ko.observableArray();
+
+            var itensProjeto = ko.utils.arrayMap(usuario.ListaProjeto,function(e){
+                return new projetoModel(e);
+            });
+
+            self.ListaProjeto.push.apply(self.ListaProjeto,  itensProjeto);
+            
+
+            self.Supervisor.subscribe(function (item) {
+                if (item) {
+                    self.ID_Grupo(null);
+                }
+            });
+
+            self.ID_Grupo.subscribe(function (item) {
+                if (item) {
+                    self.Supervisor(false);
+                }
+            });
+
+        }
+        var projetoModel = function(projeto)
+        {
+
+            var self = this;
+            self.ID = ko.observable(projeto.ID);
+            self.Descricao = ko.observable(projeto.Descricao);
+            self.Status =  ko.observable(projeto.Status);
+
+
+        }
+
+        var screenModel = new ScreenModel();
+        ko.applyBindings(screenModel);
+
+
+
+
+    </script>
+
+}

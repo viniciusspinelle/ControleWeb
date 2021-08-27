@@ -1,0 +1,73 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/knockout")
+    @Scripts.Render("~/bundles/DataTables")
+    @Scripts.Render("~/bundles/typeahead")
+    @Scripts.Render("~/bundles/jstorage")
+    @Scripts.Render("~/bundles/ControleWeb")
+    @Scripts.Render("~/bundles/validation")
+    @Scripts.Render("~/bundles/Maskd")
+    @Scripts.Render("~/bundles/blockUI")
+    <script src="@Url.Content("~/Scripts/jquery-2.2.3.min.js")" type="text/javascript"></script>
+    <script src="~/Scripts/jquery-2.2.3.js"></script>
+    <script src="~/Scripts/DataTables/jquery.dataTables.js"></script>
+    <link rel="stylesheet" type="text/css" href="~/Content/DataTables/css/jquery.dataTables.css">
+    @*<link rel="stylesheet" type="text/css" href="~/Content/typeahead.css" />*@
+    <script type="text/javascript" src="~/Scripts/jquery.maskedinput.js"></script>
+    <script type="text/javascript" src="~/Scripts/jquery.blockUI.js"></script>
+    
+   
+    <script src="~/Scripts/typeahead.js" type="text/javascript"></script>
+  
+   
+   
+
+</head>
+<body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">              
+
+                @Html.ActionLink("Controle", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li class="dropdown">
+                        <a href="#" tabindex="0" data-toggle="dropdown" data-submenu>Cadastros<span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li tabindex="0">@Html.ActionLink("Assunto Suporte", "Index", "AssuntoSuporte")</li>
+                            <li tabindex="0">@Html.ActionLink("Categoria Suporte", "Index", "CategoriaSuporte")</li>
+                            <li tabindex="0">@Html.ActionLink("Cliente", "Index", "Cliente")</li>
+                            <li tabindex="0">@Html.ActionLink("Empresa", "Index", "Empresa")</li>
+                            <li tabindex="0">@Html.ActionLink("Grupo", "Index", "Grupo")</li>
+                            <li tabindex="0">@Html.ActionLink("Projeto", "Index", "Projeto")</li>
+                            <li tabindex="0">@Html.ActionLink("Usuario", "Index", "Usuario")</li>
+                        </ul>
+                    </li>
+                </ul>
+                @Html.Partial("_LoginPartial")
+            </div>
+        </div>
+    </div>
+    <div class="container body-content">
+        @RenderBody()
+        <div style="position: fixed; z-index: 999999; top: 12px; right: 12px;" id="alertPlaceHolder"></div>
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+        </footer>
+    </div>
+
+    
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

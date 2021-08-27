@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="bee319427da5414585cbbb5158a48614" Name="Diagram1" ZoomLevel="97">
+        <EntityTypeShape EntityType="CONTROLEModel.ASSUNTO_SUPORTE" Width="1.5" PointX="7.5" PointY="9.5" />
+        <EntityTypeShape EntityType="CONTROLEModel.CATEGORIA_SUPORTE" Width="1.5" PointX="5.25" PointY="9.875" />
+        <EntityTypeShape EntityType="CONTROLEModel.EMAIL_CLIENTE" Width="1.5" PointX="7.5" PointY="21" />
+        <EntityTypeShape EntityType="CONTROLEModel.EMPRESA" Width="1.5" PointX="0.75" PointY="9.125" />
+        <EntityTypeShape EntityType="CONTROLEModel.GRUPO" Width="1.5" PointX="0.75" PointY="6.25" />
+        <EntityTypeShape EntityType="CONTROLEModel.HISTORICO_SUPORTE" Width="1.5" PointX="7.5" PointY="15.5" />
+        <EntityTypeShape EntityType="CONTROLEModel.HISTORICO_SUPORTE_ITENS" Width="1.5" PointX="9.75" PointY="11.625" />
+        <EntityTypeShape EntityType="CONTROLEModel.PROJETO" Width="1.5" PointX="3" PointY="13.75" />
+        <EntityTypeShape EntityType="CONTROLEModel.TELEFONE_CLIENTE" Width="1.5" PointX="7.5" PointY="18.125" />
+        <EntityTypeShape EntityType="CONTROLEModel.USUARIO_PROJETO" Width="1.5" PointX="5.25" PointY="12.875" />
+        <AssociationConnector Association="CONTROLEModel.FK__ASSUNTO_S__ID_CA__6A30C649" />
+        <AssociationConnector Association="CONTROLEModel.FK__HISTORICO__ID_AS__6EF57B66" />
+        <AssociationConnector Association="CONTROLEModel.FK__CATEGORIA__ID_PR__5DCAEF64" />
+        <AssociationConnector Association="CONTROLEModel.FK__HISTORICO__ID_CA__70DDC3D8" />
+        <AssociationConnector Association="CONTROLEModel.FK__PROJETO__ID_EMPR__5165187F" />
+        <AssociationConnector Association="CONTROLEModel.FK__HISTORICO__ID_HI__6E01572D" />
+        <AssociationConnector Association="CONTROLEModel.FK__USUARIO_P__ID_PR__5535A963" />
+        <EntityTypeShape EntityType="CONTROLEModel.CLIENTE" Width="1.5" PointX="5.25" PointY="15.875" />
+        <AssociationConnector Association="CONTROLEModel.FK__CLIENTE__ID_PROJ__5812160E" />
+        <AssociationConnector Association="CONTROLEModel.FK__EMAIL_CLI__ID_CL__6383C8BA" />
+        <AssociationConnector Association="CONTROLEModel.FK__HISTORICO__ID_CL__5AEE82B9" />
+        <AssociationConnector Association="CONTROLEModel.FK__TELEFONE___ID_CL__60A75C0F" />
+        <EntityTypeShape EntityType="CONTROLEModel.USUARIO" Width="1.5" PointX="3" PointY="7.875" />
+        <AssociationConnector Association="CONTROLEModel.FK__ASSUNTO_S__ID_US__6B24EA82" />
+        <AssociationConnector Association="CONTROLEModel.FK__USUARIO__ID_EMPR__4D94879B" />
+        <AssociationConnector Association="CONTROLEModel.FK__USUARIO__ID_GRUP__4E88ABD4" />
+        <AssociationConnector Association="CONTROLEModel.FK__HISTORICO__ID_US__6FE99F9F" />
+        <AssociationConnector Association="CONTROLEModel.FK__USUARIO_P__ID_US__5441852A" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

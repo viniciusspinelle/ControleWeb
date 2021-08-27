@@ -1,0 +1,99 @@
+﻿@*@model ControleServices.CATEGORIA_SUPORTE
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}*@
+
+<h2>Cadastro de Categoria Suporte</h2>
+
+</br>
+<form  data-bind="with: CategoriaSuporte">
+    <fieldset>
+        <div class="well">
+            <div class="row">
+                <div class="form-group col-md-4">
+                    <label>Projeto</label>
+                    <select class="form-control" data-bind="options:ListaProjeto, optionsValue:'Id_projeto', optionsText: '_Projeto',value:ID_Projeto, optionsCaption: 'Selecione um Projeto'"></select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3 form-group" data-bind="validationElement: Descricao">
+                    <label>Descrição</label>
+                    <textarea class="form-control col-md-12" rows="2" cols="1204" maxlength="5000" data-bind="value:Descricao" placeholder="Digite a Descrição"></textarea>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="form-group col-md-12">
+                    <button type="button" class="btn btn-primary btn-sm" data-bind="click: salva_categoria">Salvar</button>
+                </div>
+            </div>
+        </div>
+    </fieldset>
+</form>
+
+
+<div>
+    @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-default btn-sm " })
+</div>
+
+
+@section Scripts {
+
+
+    <script>
+
+        var parsedJSON = @Html.Raw(Json.Encode(Model));
+        var ScreenModel = function () {
+
+            self = this,
+            self.CategoriaSuporte = new categoriaModel(parsedJSON);
+
+            ListaProjeto = ko.utils.arrayMap(parsedJSON.ListaProjeto, function(item) {               
+                return ({Id_projeto: item.ID, _Projeto:item.Descricao});
+            });
+
+
+            self.salva_categoria=  function (data) {
+                
+                $.ajax({
+                    url: '@Url.Action("Edit/")',
+                    type: 'post',
+                    dataType: 'json',
+                    data:ko.toJSON(screenModel),
+                    contentType: 'application/json',
+                    success: function (data) {
+
+                        if(screenModel.ID == 0)
+                        {
+                            controle.showSuccessPopup('CATEGORIA SUPORTE', 'Categoria Cadastrada com sucesso!','@Url.Action("Index")');
+                        }
+                        else
+                        {
+                            controle.showSuccessPopup('CATEGORIA SUPORTE', 'Categoria alterada com sucesso!','@Url.Action("Index")');
+                        }
+                    },
+
+                });
+
+            };
+
+        };
+
+        var categoriaModel = function (categoria) {
+            
+            self = this,
+            self.ID = ko.observable(categoria.ID);
+            self.ID_Projeto= ko.observable(categoria.ID_Projeto);
+            self.Descricao = ko.observable(categoria.Descricao).extend({required:true});
+        }
+
+        var screenModel = new ScreenModel();
+        ko.applyBindings(screenModel);
+
+    </script>
+}
+
+
+

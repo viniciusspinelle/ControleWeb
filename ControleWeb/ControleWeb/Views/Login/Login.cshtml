@@ -1,0 +1,65 @@
+﻿@model Entities.Usuario
+@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/_LayoutLogin.cshtml";
+}
+
+
+
+
+
+@using (Html.BeginForm("Login", "Login", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal" }))
+{
+    @Html.AntiForgeryToken();
+
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+    <div class="container">
+        <div class="form-login">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <div class="panel-title ">Controle</div>
+                </div>
+                <div style="padding-top:50px" class="panel-body">
+                    <div style="display:none" id="error" class="alert alert-danger col-sm-12">
+
+                    </div>
+                    <div style="margin-bottom: 25px;margin-left:37px" class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                        @Html.EditorFor(model => model.Login, new { htmlAttributes = new { @class = "form-control", placeholder = "Login" } })
+                    </div>
+
+                    <div style="margin-bottom: 25px;margin-left:37px" class="input-group ">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                        @Html.EditorFor(model => model.Senha, new { htmlAttributes = new { @class = "form-control ", @type = "password", placeholder = "Senha" } })
+                        
+                    </div>
+
+                    <div style="margin-bottom: 20px;margin-left:37px" class="input-group">
+                        <span class="input-group-addon">
+                            <input type="checkbox">
+                        </span>
+                        <input type="text" class="form-control" style="color: #2e6da4; font-weight: bold;" readonly="true" value="Lembrar Login">
+                    </div>
+
+                    <div class="text-center">
+                        @Html.ValidationMessage("error", "", new { @class = "text-error " })
+                    </div>
+
+                    <div style="margin-top:10px;margin-left:30px" class="form-group">
+
+                        <div>
+                            <div class="col-sm-12 col-md-offset-3 ">
+                                <input type="submit" value="Acessar" class="btn primary" />
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+}
+
+

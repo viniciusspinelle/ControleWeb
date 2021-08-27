@@ -1,0 +1,178 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{7064BD3D-99AF-4118-A5C4-86CBE76FCC9F}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ControleServices</RootNamespace>
+    <AssemblyName>ControleServices</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ASSUNTO_SUPORTE.cs">
+      <DependentUpon>CONTROLEEEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Business\AssuntoSuporteBusiness.cs" />
+    <Compile Include="Business\CategoriaSuporteBusiness.cs" />
+    <Compile Include="Business\ClienteBusiness.cs" />
+    <Compile Include="Business\EmpresaBusiness.cs" />
+    <Compile Include="Business\GrupoBusiness.cs" />
+    <Compile Include="Business\HistoricoSuporteBusiness.cs" />
+    <Compile Include="Business\ProjetoBusiness.cs" />
+    <Compile Include="Business\UsuarioBusiness.cs" />
+    <Compile Include="Business\UsuarioProjetoBusiness.cs" />
+    <Compile Include="CATEGORIA_SUPORTE.cs">
+      <DependentUpon>CONTROLEEEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CLIENTE.cs">
+      <DependentUpon>CONTROLEEEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CONTROLEEEntities.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CONTROLEEEntities.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CONTROLEEEntities.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CONTROLEEEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CONTROLEEEntities.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CONTROLEEEntities.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="EMAIL_CLIENTE.cs">
+      <DependentUpon>CONTROLEEEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EMPRESA.cs">
+      <DependentUpon>CONTROLEEEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GRUPO.cs">
+      <DependentUpon>CONTROLEEEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="HISTORICO_SUPORTE.cs">
+      <DependentUpon>CONTROLEEEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="HISTORICO_SUPORTE_ITENS.cs">
+      <DependentUpon>CONTROLEEEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PROJETO.cs">
+      <DependentUpon>CONTROLEEEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repository\AssuntoSuporteRepository.cs" />
+    <Compile Include="Repository\CategoriaSuporteRepository.cs" />
+    <Compile Include="Repository\ClienteRepository.cs" />
+    <Compile Include="Repository\EmailClienteRepository.cs" />
+    <Compile Include="Repository\EmpresaRepository.cs" />
+    <Compile Include="Repository\GrupoRepository.cs" />
+    <Compile Include="Repository\HistoricoSuporteItensRepository.cs" />
+    <Compile Include="Repository\HistoricoSuporteRepository.cs" />
+    <Compile Include="Repository\ProjetoRepository.cs" />
+    <Compile Include="Repository\TelefoneClienteRepository.cs" />
+    <Compile Include="Repository\UsuarioProjetoRepository.cs" />
+    <Compile Include="Repository\UsuarioRepository.cs" />
+    <Compile Include="TELEFONE_CLIENTE.cs">
+      <DependentUpon>CONTROLEEEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="USUARIO.cs">
+      <DependentUpon>CONTROLEEEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="USUARIO_PROJETO.cs">
+      <DependentUpon>CONTROLEEEntities.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Utils\UtilsBusiness.cs" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <None Include="App.Config" />
+    <EntityDeploy Include="CONTROLEEEntities.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>CONTROLEEEntities.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="CONTROLEEEntities.edmx.diagram">
+      <DependentUpon>CONTROLEEEntities.edmx</DependentUpon>
+    </None>
+    <None Include="packages.config" />
+    <None Include="Scripts\jquery-1.9.0.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="CONTROLEEEntities.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>CONTROLEEEntities.edmx</DependentUpon>
+      <LastGenOutput>CONTROLEEEntities.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="CONTROLEEEntities.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>CONTROLEEEntities.edmx</DependentUpon>
+      <LastGenOutput>CONTROLEEEntities.cs</LastGenOutput>
+    </Content>
+    <Content Include="Scripts\jquery-1.9.0.intellisense.js" />
+    <Content Include="Scripts\jquery-1.9.0.js" />
+    <Content Include="Scripts\jquery-1.9.0.min.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Entities\Entities.csproj">
+      <Project>{a742c37d-1c1f-41d5-83a1-7d883f299046}</Project>
+      <Name>Entities</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

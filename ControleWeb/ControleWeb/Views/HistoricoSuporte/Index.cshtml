@@ -1,0 +1,495 @@
+﻿@using Entities;
+@model Entities.HistoricoSuporteItens
+
+
+
+
+<h2>Historico Suporte</h2>
+</br>
+
+<div>
+    <fieldset style="width:650px">
+        <form role="form">
+            <div class="well well-sm">
+
+                <div class="form-group">
+                    <label>Cliente</label>
+                    <div>
+                        <input type="text" class="form-control" id="txtCliente" data-provide="typeahead" placeholder="Digite o nome do Cliente" autocomplete="off">
+                    </div>
+                </div>
+            </div>
+        </form>
+    </fieldset>
+</div>
+
+
+<div class="row" data-bind="with:Historico">
+    <div class="col-sm-12">
+        <div>
+            <div data-bind="visible:ListaItens() == 0 && ID_Cliente()">
+                <div>
+                    <button type="button" class="btn btn-primary btn-sm" href="#" data-bind="click: function(){attr: { href:OpenPopUp()}}">Cadastrar Suporte</button>
+                </div>
+                <br>
+
+                <div class="alert alert-info col-xs-offset-2 col-xs-4  margin-top-10" role="alert">
+                    <i class="glyphicon glyphicon-ban-circle small"></i>  Cliente não possui suporte cadastrado !
+                </div>
+            </div>
+            </br>
+
+            <div data-bind="visible:ListaItens() != 0">
+                <div>
+                    <button type="button" class="btn btn-primary btn-sm" href="#" data-bind="click: function(){attr: { href:OpenPopUp()}}">Cadastrar Suporte</button>
+                </div>
+                <br />
+                <div style="background-color: #ff6a00; padding: 6px;  width:650px">
+                    <label style="color: #000000">SUPORTE</label>
+                </div>
+                <br>
+                <form data-bind="foreach: ListaItens()">
+                    <fieldset style="width:650px">
+
+                        <div class="well well-sm">
+                            <div class="row">
+                                <div class="form-group col-md-4">
+                                    <label>Data</label>
+                                    <div data-bind="text:Data, masked: Data, mask: '99/99/9999'"></div>
+
+                                </div>
+                                <div class="form-group col-md-3">
+                                    <label>Assunto suporte</label>
+                                    <div type="text" data-bind="text:Descricao_Assunto"></div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-md-8">
+                                    <label>Observação</label>
+                                    <div data-bind="text:Observacao"></div>
+                                </div>
+
+                                <div class="col-md-3">
+                                    <button type="button" class="btn btn-warning btn-sm" href="#" data-bind="click: $root.editar_historico">Editar</button> <button type="button" class="btn btn-danger btn-sm" data-bind="click:$root.delete_historico">Deletar</button>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+@*MODAL*@
+
+
+<div class="modal fade" id="myModal" role="dialog" aria-labelledby="myModalLabel" data-bind="with:Itens">
+    <div class="modal-dialog " style="width:800px">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">X</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title">Historico</h4>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="row">
+                        <div class="form-group col-md-5">
+                            <label>Clinica</label>
+                            <input type="text" class="form-control" data-bind="value:Clinica_Cliente">
+                        </div>
+
+
+                        <div class="form-group col-md-4">
+                            <label> Nome Cliente </label>
+                            <input type="text" class="form-control" data-bind="value:Nome_Cliente">
+                        </div>
+
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-md-5">
+                            <label>Categoria Suporte</label>
+                            <select class="form-control" data-bind="options:ListaCategoria, optionsValue:'ID', optionsText: 'Descricao',value:ID_CategoriaSuporte, optionsCaption: 'Selecione a Categoria'" style="width:200px"></select>
+                        </div>
+
+                        <div class="form-group col-md-4" data-bind="visible:ID_CategoriaSuporte()">
+                            <label>Assunto Suporte</label>
+                            <select class="form-control" data-bind="options:ListaAssunto, optionsValue:'ID', optionsText: 'Descricao',value:ID_AssuntoSuporte, optionsCaption: 'Selecione o Assunto'"></select>
+                        </div>
+
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-md-12">
+                            <label>Observação</label>
+                            <textarea type="text" rows="3" cols="100" class="form-control" data-bind="value:Observacao"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="well" data-bind="visible: ID_AssuntoSuporte()">
+                        <div class="row">
+                            <div class="form-group col-md-4">
+                                <label> Link Manual </label>
+                                <div type="text" style="width:200px"></div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-md-4">
+                                <label> Link Video </label>
+                                <div type="text" style="width:200px"></div>
+                            </div>
+                        </div>
+
+                    </div>
+                </form>
+
+            </div>
+            <div class="modal-footer">
+                @*<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>*@
+                <button type="button" class="btn btn-success" data-bind="click:$root.salva_historico">Salvar</button>
+            </div>
+
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+
+@section Scripts {
+    <script type="text/javascript">
+
+        $("#txtCliente").typeahead({
+
+            onSelect: function (item) {
+                //$.jStorage.set("ID", item.value);
+                screenModel.Itens.ID_Cliente(item.value);
+                screenModel.Historico.ID_Cliente(item.value);
+                screenModel.GetHistorico(item.value);
+
+            },
+            items: 5,
+            displayField: 'RazaoSocial',
+            valueField: 'ID',
+            ajax: {
+                url: "/Cliente/getClientes",
+                timeout: 500,
+                triggerLength: 3,
+                method: "get",
+                preDispatch: function (query) {
+                    return {
+
+                        search: query
+                    }
+                },
+                preProcess: function (data) {
+
+                    if (data.success === false) {
+                        return false;
+
+                    }
+                    return data.cliente;
+
+                }
+
+            },
+
+        });
+
+        var parsedJSON = @Html.Raw(Json.Encode(Model));
+        var ScreenModel = function () {
+            var self = this;
+
+            self.Historico = new historicoModel();
+            self.Itens = new PopUp_HistoricoModel();
+
+            @*self.ListaCategoria = ko.observableArray();
+            self.ListaCategoria= @Html.Raw(Json.Encode(ViewBag.ListaCategoria));*@
+
+            CleanPopUp = function () {
+                screenModel.Historico.ID(null);
+                screenModel.Historico.ID_AssuntoSuporte(null),
+                screenModel.Historico.ID_Usuario(null);
+                screenModel.Historico.ID_HistoricoSuporte(null);
+                screenModel.Historico.Data(null);
+                screenModel.Historico.Nome_Cliente(null);
+                screenModel.Historico.Clinica_Cliente(null);
+                screenModel.Historico.Observacao(null);
+                screenModel.Historico.ID_CategoriaSuporte(null);
+            };
+
+            OpenPopUp =  function ( id )
+            {
+                console.log(screenModel.Itens.ID_Cliente());
+                console.log(id);
+                if(id == undefined){
+                    CleanPopUp();
+
+                    $('#myModal').modal('show')
+                    screenModel.Itens.ID(id);
+
+                    
+                }
+
+            };
+
+
+            self.GetHistorico = function (id) {
+                if(id != null)
+                {
+                    controle.blockUI();
+                    $.ajax({
+                        url: "GetHistorico/",
+                        type: "GET",
+                        cache: false,
+                        dataType: "json",
+                        data: {id: id },
+                        success: function (data) {
+                            screenModel.Historico.ListaItens(ko.utils.arrayMap(data.historico,function (i){
+                                var item = new historicoModel();
+                                item.ID(i.ID);
+                                item.ID_AssuntoSuporte(i.ID_AssuntoSuporte);
+                                item.ID_HistoricoSuporte(i.ID_HistoricoSuporte);
+                                item.ID_CategoriaSuporte(i.ID_CategoriaSuporte);
+                                item.ID_Usuario(i.ID_Usuario);
+                                item.Data(controle.formataData(i.Data,"DD/MM/YYYY"));
+                                item.Nome_Cliente(i.Nome_Cliente);
+                                item.Clinica_Cliente(i.Clinica_Cliente);
+                                item.Observacao(i.Observacao);
+                                item.ID_Cliente(i.ID_Cliente);
+
+                                //if(i.ID_Assunto_Suporte == null)
+                                //{
+                                //    item.Descricao_Assunto("---")
+                                //}
+                                //else{
+                                //    item.Descricao_Assunto(ko.utils.arrayMap(screenModel.Historico.ListaAssunto, function (e){
+
+                                //        if(e.ID == i.ID_Assunto_Suporte)
+                                //        {
+                                //            console.log(e.Descricao);
+                                //            return (e.Descricao);
+                                //        }
+                                //    }));
+                                //}
+                                return item;
+
+                            }));
+                        }
+                    });
+                }
+            }
+
+
+
+            self.editar_historico = function (item) {
+
+                self.CleanPopUp;
+                controle.blockUI();
+                $.ajax({
+                    url: "GetHistoricoItens/",
+                    type: "GET",
+                    contentType: "application/json; charset=utf-8",
+                    data: { id: item.ID() },
+                    cache: false,
+                    success: function (data) {
+                        controle.unblockUI();
+
+                        console.log(data.ListaAssunto);
+                        screenModel.Itens.ID(data.ID);
+                        screenModel.Itens.ID_AssuntoSuporte(data.ID_AssuntoSuporte),
+                        screenModel.Itens.ID_Usuario(data.ID_Usuario);
+                        screenModel.Itens.ID_CategoriaSuporte(data.ID_CategoriaSuporte);
+                        screenModel.Itens.ID_HistoricoSuporte(data.ID_HistoricoSuporte);
+                        screenModel.Itens.Data(data.Data);
+                        screenModel.Itens.Nome_Cliente(data.Nome_Cliente);
+                        screenModel.Itens.Clinica_Cliente(data.Clinica_Cliente);
+                        screenModel.Itens.Observacao(data.Observacao);
+
+                        ko.utils.arrayMap()
+
+                        $('#myModal').modal('show');
+
+
+                    }
+                });
+            };
+
+            self.delete_historico=  function (item) {
+                controle.blockUI();
+                $.ajax({
+                    url: '@Url.Action("Delete")',
+                    type: 'post',
+                    contentType: 'application/json',
+                    dataType: 'json',
+                    data:ko.toJSON(item),
+                    success: function (data) {
+
+
+                        ko.utils.arrayMap(screenModel.Historico.ListaItens(),function(i){
+                            if(i.ID() == data.ID)
+                            {
+                                screenModel.Historico.ListaItens.remove(i);
+                            };
+                        });
+                    }
+
+                });
+
+            };
+
+
+            self.salva_historico = function (data) {
+                controle.blockUI();
+                console.log("Teste")
+                console.log(screenModel.Itens.ID_CategoriaSuporte());
+                $.ajax({
+                    url: '@Url.Action("Edit/")',
+                    type: 'post',
+                    data:ko.toJSON(screenModel.Itens),
+                    contentType: 'application/json',
+                    success: function (data) {
+
+                        if(screenModel.Itens.ID() != undefined )
+                        {
+                            ko.utils.arrayMap(screenModel.Historico.ListaItens(),function(i){
+
+                                if(i.ID() == data.historico.ID)
+                                {
+                                    i.ID(data.historico.ID);
+                                    i.ID_AssuntoSuporte(data.historico.ID_AssuntoSuporte);
+                                    i.ID_HistoricoSuporte(data.historico.ID_HistoricoSuporte);
+                                    i.ID_Usuario(data.historico.ID_Usuario);
+                                    i.Data(controle.formataData(data.historico.Data,"DD/MM/YYYY"));
+                                    i.Nome_Cliente(data.historico.Nome_Cliente);
+                                    i.Clinica_Cliente(data.historico.Clinica_Cliente);
+                                    i.Observacao(data.historico.Observacao);
+
+                                    //i.Descricao_Assunto(ko.utils.arrayMap(data.historico.ListaAssunto, function (e){
+
+                                    //    if(e.ID == i.ID_Assunto_Suporte())
+                                    //    {
+                                    //        return (e.Descricao);
+                                    //    }
+                                    //}));
+                                }
+                                return i;
+                            });
+                        }else
+                        {
+                            var historicoItem = new ItensModel(data.historico); // Para preencher o foreach com os dados que volta do servidor
+                            screenModel.Historico.ListaItens.unshift(historicoItem);
+                        };
+                        $('#myModal').modal('hide');
+                    },
+                    complete: function () {
+                        controle.unblockUI();
+                    }
+                });
+
+            };
+        }
+
+
+        var ItensModel = function (itens) {
+
+            var self = this;
+            self.ID = ko.observable(itens.ID);
+            self.ID_Usuario = ko.observable(itens.ID_Usuario).extend({ required: true });
+            self.ID_AssuntoSuporte = ko.observable(itens.ID_AssuntoSuporte);
+            self.ID_HistoricoSuporte = ko.observable(itens.ID_HistoricoSuporte);
+            self.ID_CategoriaSuporte = ko.observable(itens.ID_CategoriaSuporte);
+
+            self.Data = ko.observable(controle.formataData(itens.Data,"DD/MM/YYYY"));
+            self.Nome_Cliente = ko.observable(itens.Nome_Cliente);
+            self.Clinica_Cliente = ko.observable(itens.Clinica_Cliente);
+            self.Observacao = ko.observable(itens.Observacao);
+            self.Descricao_Assunto = ko.observable();//teste
+
+            //self.Descricao_Assunto(ko.utils.arrayMap(itens.ListaAssunto, function (e){
+
+            //    if(e.ID == itens.ID_Assunto_Suporte)
+            //    {
+            //        return (e.Descricao);
+            //    }
+            //}));
+
+        }
+
+        var historicoModel = function () {
+
+            var self = this;
+            self.ID = ko.observable();
+            self.ID_Usuario = ko.observable();
+            self.ID_Cliente = ko.observable();
+            self.ID_AssuntoSuporte = ko.observable();
+            self.ID_HistoricoSuporte = ko.observable();
+            self.ID_CategoriaSuporte=ko.observable();
+
+
+            self.Data = ko.observable();
+            self.Nome_Cliente = ko.observable();
+            self.Clinica_Cliente = ko.observable();
+            self.Observacao = ko.observable();
+            self.Descricao_Assunto = ko.observable();//teste
+
+            self.ListaItens = ko.observableArray();
+
+        }
+
+        var PopUp_HistoricoModel = function(e)
+        {
+            var self=this;
+            self.ID = ko.observable();
+            self.ID_Usuario= ko.observable();
+            self.ID_CategoriaSuporte=ko.observable();
+            self.ID_AssuntoSuporte=ko.observable();
+            self.ID_HistoricoSuporte = ko.observable();
+            self.ID_Cliente =ko.observable();
+
+            self.Data = ko.observable();
+            self.Descricao = ko.observable();
+            self.Clinica_Cliente = ko.observable();
+            self.Observacao = ko.observable();
+            self.Nome_Cliente = ko.observable();
+
+            self.ListaAssunto = ko.observableArray();
+            
+            self.ListaCategoria = ko.observableArray();
+            self.ListaCategoria= @Html.Raw(Json.Encode(ViewBag.ListaCategoria));
+
+            self.ID_CategoriaSuporte.subscribe(function (id) {
+                self.ID_AssuntoSuporte(null);
+                self.ListaAssunto.removeAll();
+
+                if (id != undefined) {
+                    controle.blockUI();
+                    $.ajax({
+                        url: '@Url.Action("GetAssunto", "AssuntoSuporte")',
+                        type: "GET",
+                        cache: false,
+                        dataType: "json",
+                        data: { id: id },
+                        success: function (data) {
+                            controle.unblockUI();
+
+                            ko.utils.arrayPushAll(self.ListaAssunto,data);
+
+
+
+                        }
+                    });
+                }
+
+            });
+        }
+
+        var screenModel = new ScreenModel();
+
+        ko.applyBindings(screenModel);
+    </script>
+}

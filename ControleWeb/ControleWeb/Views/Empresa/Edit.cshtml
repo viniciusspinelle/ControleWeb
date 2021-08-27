@@ -1,0 +1,153 @@
+﻿@*@model Entities.Empresa*@
+
+<h4>Cadastro Empresa</h4>
+
+</br>
+<fieldset>
+    <form data-bind="with: Empresa">
+        <div class="well">
+            <div class="row">
+                <div class="form-group col-md-6" data-bind="validationElement: Nome">
+                    <label>Nome</label>
+                    <input type="text" class="form-control" data-bind="value:Nome" placeholder="Digite seu nome">
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="form-group col-md-4" data-bind="validationElement: CPFCNPJ">
+                    <label>CPFCNPJ</label>
+                    <input type="text" class="form-control" data-bind="value:CPFCNPJ,masked: CPFCNPJ, mask: '999.999.999-99'" placeholder="Digite o CPF ou CNPJ">
+                </div>
+
+                <div class="form-group col-md-4" data-bind="validationElement: Email">
+                    <label>Email</label>
+                    <input type="text" class="form-control" data-bind="value:Email" placeholder="Digite seu Email">
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="form-group col-md-4">
+                    <label>Celular</label>
+                    <input type="text" class="form-control" data-bind="value:Celular, masked: Celular, mask: '(99) 9999-9999?9'" placeholder="Digite seu Celular">
+                </div>
+
+                <div class="form-group col-md-4">
+                    <label>Telefone</label>
+                    <input type="text" class="form-control" id="Telefone" data-bind="value:Telefone,masked: Telefone, mask: '(99) 9999-9999?9'" placeholder="Digite seu Telefone">
+                </div>
+            </div>
+
+
+            <div class="row">
+
+                <div class="form-group col-md-12">
+                    <label>Endereço</label>
+                    <input class="form-control" data-bind="value: Endereco" placeholder="Digite seu Endereço">
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="form-group col-md-4">
+                    <label>Numero</label>
+                    <input type="text" class="form-control " data-bind="value:Numero" placeholder="Digite o Numero">
+                </div>
+
+                <div class="form-group col-md-4">
+                    <label>Bairro</label>
+                    <input type="text" class="form-control" data-bind="value:Bairro" placeholder="Digite o Bairro">
+                </div>
+                <div class="form-group col-md-4 ">
+                    <label>Cidade</label>
+                    <input type="text" class="form-control" data-bind="value:Cidade" placeholder="Digite a Cidade">
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="form-group col-md-4">
+                    <label>Estado</label>
+                    <input type="text" class="form-control" data-bind="value:Estado" placeholder="Digite o Estado">
+                </div>
+
+                <div class="form-group col-md-4" >
+                    <label>CEP</label>
+                    <input type="text" class="form-control" data-bind="value:Cep,masked: Cep, mask:'99.999-999'">
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-md-12">
+                    <button type="button" class="btn btn-primary" data-bind="click: salva_empresa">Salvar</button>
+                </div>
+            </div>
+        </div>
+    </form>
+
+
+</fieldset>
+
+<div>
+    @Html.ActionLink("Voltar", "Index", null, new { @class = "btn btn-default btn-sm" })
+</div>
+
+@section Scripts {
+
+
+    <script>
+
+        var parsedJSON = @Html.Raw(Json.Encode(Model));
+        var ScreenModel = function ()  {
+
+            self = this;
+            self.Empresa= new empresaModel(parsedJSON);
+
+
+
+            self.salva_empresa =  function (data) {
+
+                $.ajax({
+                    url: '@Url.Action("Edit")',
+                    type: 'post',
+                    dataType: 'json',
+                    data:ko.toJSON(screenModel),
+                    contentType: 'application/json',
+                    success: function (data) {
+                        if(screenModel.ID == 0)
+                        {
+                            controle.showSuccessPopup('Empresa', 'Empresa Cadastrada com sucesso!','@Url.Action("Index")');
+                        }
+                        else
+                        {
+                            controle.showSuccessPopup('Empresa', 'Empresa alterada com sucesso!','@Url.Action("Index")');
+                        }
+                    },
+
+
+                });
+
+            };
+
+        };
+
+        var empresaModel = function( empresa)
+        {
+            self = this;
+            self.ID = ko.observable(empresa.ID);
+            self.Nome =  ko.observable(empresa.Nome).extend({required:true});
+            self.CPFCNPJ= ko.observable(empresa.CPFCNPJ).extend({required:true});
+            self.Email = ko.observable(empresa.Email).extend({required:true,email:true, pattern: { message: 'Email valido!'}});
+            self.Celular = ko.observable(empresa.Celular);
+            self.Telefone = ko.observable(empresa.Telefone);
+            self.Endereco = ko.observable(empresa.Endereco);
+            self.Numero = ko.observable(empresa.Numero);
+            self.Bairro = ko.observable(empresa.Bairro);
+            self.Cidade = ko.observable(empresa.Cidade);
+            self.Estado = ko.observable(empresa.Estado);
+            self.Cep = ko.observable(empresa.Cep);
+        }
+
+        var screenModel = new ScreenModel()
+        ko.applyBindings(screenModel);
+
+
+    </script>
+
+}

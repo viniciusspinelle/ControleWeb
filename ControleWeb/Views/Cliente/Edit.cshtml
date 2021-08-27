@@ -1,0 +1,301 @@
+﻿@using Entities;
+@model Entities.Cliente
+
+<h2>Cadastro de Cliente</h2>
+
+
+<form  data-bind="with: Cliente">
+    <div class="well">
+        <fieldset>
+            <div class="row">
+                <div class="form-group col-md-4">
+                    <label>Razão Social</label>
+                    <input type="text" class="form-control" data-bind="value:RazaoSocial">
+                </div>
+
+                <div class="form-group col-md-4">
+                    <label>Nome Fantasia</label>
+                    <input type="text" class="form-control" data-bind="value:NomeFantasia">
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="form-group col-md-4" data-bind="validationElement: CPFCNPJ">
+                    <label>CPF / CNPJ</label>
+                    <input type="text" class="form-control" data-bind="value:CPFCNPJ, masked: CPFCNPJ, mask: '999.999.999-99'">
+                </div>
+
+                <div class="form-group col-md-4">
+                    <label>Contato</label>
+                    <input type="text" class="form-control" data-bind="value:Contato">
+                </div>
+            </div>
+        </fieldset>
+        </br>
+
+        <fieldset>
+            <legend></legend>
+            <div class="row">
+                <div class="form-group col-md-4">
+                    <label>Endereço</label>
+                    <input type="text" class="form-control" data-bind="value:Endereco">
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Numero</label>
+                    <input type="text" class="form-control" style="width:50px" data-bind="value:Numero">
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="form-group col-md-4">
+                    <label>Bairro</label>
+                    <input type="text" class="form-control" data-bind="value:Bairro">
+                </div>
+
+                <div class="form-group col-md-4">
+                    <label>Cidade</label>
+                    <input type="text" class="form-control" data-bind="value:Cidade">
+                </div>
+
+                <div class="form-group col-md-4">
+                    <label>CEP</label>
+                    <input type="text" class="form-control" style="width:120px" data-bind="value:CEP,masked: CEP, mask:'99.999-999'">
+                </div>
+            </div>
+        </fieldset>
+        </br>
+        <fieldset>
+            <legend>CONTATOS</legend>
+            <div>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th> Telefones </th>
+                            <th> Principal </th>
+                            <th> Responsavel </th>
+                        </tr>
+                    </thead>
+
+                    <tbody data-bind='foreach: ListaTelefone'>
+                        <tr>
+                            <td >
+                                <input type="text" class="form-control" data-bind="value:Telefone,masked: Telefone, mask: '(99) 9999-9999?9'" placeholder="Numero Telefone " />
+                            </td>
+                            <td >
+                                <input type="checkbox" data-bind="checked:Principal">
+                            </td>
+                            <td>
+                                <input type="text" class="form-control" data-bind="value:Responsavel" />
+                            </td>
+                            <td>
+                                <button type="button" class="btn btn-danger btn-xs " href="#" data-bind="click:$parent.Remove_fone">X</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <button type="button" class="btn btn-success btn-xs " href="#" data-bind="click:Add_fone">Add Telefone</button>
+            </div>
+
+            </br></br>
+
+            <div>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th> Emails </th>
+                            <th> Principal </th>
+
+                        </tr>
+                    </thead>
+
+                    <tbody data-bind='foreach: ListaEmail'>
+                        <tr>
+                            <td>
+                                <input type="text" class="form-control" data-bind="value:Email" />
+                            </td>
+                            <td >
+                                <input type="checkbox" data-bind="checked:Principal">
+                            </td>
+
+                            <td>
+                                <button type="button" class="btn btn-danger btn-xs " href="#" data-bind="click:$parent.Remove_Email">X</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <button type="button" class="btn btn-success btn-xs " href="#" data-bind="click:Add_Email">Add Email</button>
+            </div>
+        </fieldset>
+
+        </br>
+
+        <fieldset>
+            <legend></legend>
+            <div class="row">
+                <div class="form-group col-md-12">
+                    <label>Projeto</label>
+                    <select class="form-control" data-bind="options: ListaProjeto, optionsValue:'ID', optionsText: 'Descricao',value:ID_Projeto, optionsCaption: 'Selecione a Projeto'"></select>
+                </div>
+            </div>
+        </fieldset>
+
+        <div class="row">
+            <div class="form-group col-md-12" data-bind="click:Validar">
+                <button type="button" class="btn btn-primary" data-bind="click:salva_cliente">Salvar</button>
+            </div>
+        </div>
+    </div>
+</form>
+
+
+<div>
+    @Html.ActionLink("Voltar", "Index", null, new { @class = "btn btn-default btn-sm" })
+</div>
+
+@section Scripts {
+
+    <script>
+
+        var parsedJSON = @Html.Raw(Json.Encode(Model));
+        var ScreenModel = function () {
+
+            self=this;
+            self.Cliente = new clienteModel(parsedJSON);
+
+            self.ListaProjeto = ko.observableArray()
+            self.ListaProjeto = @Html.Raw(Json.Encode(Model.ListaProjeto));
+
+           
+
+            self.salva_cliente =  function () {
+
+                $.ajax({
+                    url: '@Url.Action("Edit")',
+                    type: 'post',
+                    dataType: 'json',
+                    data:ko.toJSON(screenModel),
+                    contentType: 'application/json',
+                    success: function (data) {
+                        if(screenModel.ID == 0)
+                        {
+                            controle.showSuccessPopup('CLIENTE', 'Cliente Cadastrado com sucesso!','@Url.Action("Index")');
+                        }
+                        else
+                        {
+                            controle.showSuccessPopup('CLIENTE', 'Cliente alterado com sucesso!','@Url.Action("Index")');
+                        }
+                    },
+
+                });
+
+            };
+
+        };
+
+        var clienteModel = function(cliente){
+
+            self = this;
+            self.ID = ko.observable(cliente.ID);
+            self.RazaoSocial = ko.observable(cliente.RazaoSocial).extend({required:true});
+            self.CPFCNPJ = ko.observable(cliente.CPFCNPJ).extend({required:true});
+            self.NomeFantasia= ko.observable(cliente.NomeFantasia);
+            self.Contato = ko.observable(cliente.Contato).extend({required:true});
+            self.Endereco = ko.observable(cliente.Endereco);
+            self.Numero = ko.observable(cliente.Numero);
+            self.Bairro = ko.observable(cliente.Bairro);
+            self.Cidade = ko.observable(cliente.Cidade);
+            self.Estado = ko.observable(cliente.Estado);
+            self.CEP = ko.observable(cliente.CEP);
+            self.ID_Projeto= ko.observable(cliente.ID_Projeto);
+
+            self.ListaTelefone= ko.observableArray();
+            self.ListaEmail =ko.observableArray();
+
+
+            //TELEFONE
+            var itensFone = ko.utils.arrayMap(cliente.ListaTelefone,function(e){
+                return new telefoneModel(e);
+
+            });
+
+            self.ListaTelefone.push.apply(self.ListaTelefone,  itensFone);
+
+
+            self.Add_fone = function(e){
+                self.ListaTelefone.push(new telefoneModel(e=0));
+            }
+
+            self.Remove_fone = function(e){
+                self.ListaTelefone.remove(e);
+
+            }
+
+            //EMAIL
+            var itensEmail = ko.utils.arrayMap(cliente.ListaEmail,function(e){
+
+                return new emailModel(e);
+
+            });
+            self.ListaEmail.push.apply(self.ListaEmail,  itensEmail);
+
+            self.Add_Email = function(e){
+                self.ListaEmail.push(new emailModel(e=0));
+            }
+            self.Remove_Email = function(e){
+                self.ListaEmail.remove(e);
+
+            }
+
+
+
+            self.Validar = function (e)
+            {
+                ko.utils.arrayMap(cliente.ListaEmail,function (i){
+                    var c = 0;
+                    if(i.Principal==true)
+                    {
+                        c = c +1 ;
+                    }                                        
+                    
+                    if(c != 1 )
+                    {
+                        //messagem:"So pode haver um email principal" 
+                    }
+
+                });
+
+            };
+
+        }
+
+        //Model Email
+        var emailModel = function(email)
+        {
+
+            var self = this;
+            self.ID = ko.observable(email.ID);
+            self.Email = ko.observable(email.Email).extend({required:true,email:true, pattern: { message: 'Email valido!'}});
+            self.Principal = ko.observable(email.Principal);
+            self.Deletado = ko.observable(email.Deletado);
+
+
+        }
+
+        var telefoneModel = function(e)
+        {
+            var self= this;
+            self.ID = ko.observable(e.ID);
+            self.Telefone = ko.observable(e.Telefone).extend({required:true});
+            self.Responsavel = ko.observable(e.Responsavel);
+            self.Principal =  ko.observable(e.Principal);
+
+
+        }
+
+        var screenModel = new ScreenModel();
+        ko.applyBindings(screenModel);
+
+
+    </script>
+
+}

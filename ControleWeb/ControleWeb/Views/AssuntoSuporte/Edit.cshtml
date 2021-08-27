@@ -1,0 +1,127 @@
+﻿
+
+<h2>Cadastro Assunto Suporte</h2>
+
+</br>
+<form data-bind="with: AssuntoSuporte">
+    <fieldset>
+        <div class="well">
+            <div class="row">
+                <div class="form-group col-md-4">
+                    <label>Categoria</label>
+                    <select class="form-control" required data-bind="options:ListaCategoria, optionsValue:'Id_categoria', optionsText: '_Categoria',value:ID_Categoria, optionsCaption: 'Selecione a Categoria'"></select>
+                </div>
+                <div class="form-group col-md-4">
+                    <label>Usuario</label>
+                    <select class="form-control" data-bind="options:ListaUsuario, optionsValue:'Id_usuario', optionsText: '_Usuario',value:ID_Usuario, optionsCaption: 'Selecione o Usuario'"></select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3 form-group" data-bind="validationElement: Link_Manual">
+                    <label>Link do Manual </label>
+                    <textarea class="col-md-9 form-control" rows="2" cols="100" maxlength="500" data-bind="value:Link_Manual" placeholder="Digite o  Link do Manual"></textarea>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-3 form-group" data-bind="validationElement: Link_Video">
+                    <label>Link do Video </label>
+                    <textarea class="col-md-9 form-control" rows="2" cols="100" maxlength="500" data-bind="value:Link_Video" placeholder="Digite o Link do Video"></textarea>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-3 form-group" data-bind="validationElement: Descricao">
+                    <label>Descrição do Assunto</label>
+                    <textarea class="col-md-9 form-control" rows="4" cols="100" maxlength="8000" data-bind="value:Descricao" placeholder="Digite a Descrição"></textarea>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="form-group col-md-12">
+                    <button type="button" class="btn btn-primary btn-sm" data-bind="click: salva_assunto">Salvar</button>
+                </div>
+            </div>
+        </div>
+    </fieldset>
+</form>
+
+<div>
+    @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-default btn-sm " })
+</div>
+
+
+@section Scripts {
+
+
+    <script>
+
+        var parsedJSON = @Html.Raw(Json.Encode(Model));
+        var ScreenModel = function  () {
+
+            self = this,
+            self.AssuntoSuporte = new assuntoModel(parsedJSON);
+
+          
+            
+
+            ListaCategoria = ko.utils.arrayMap(parsedJSON.ListaCategoria, function(item) {
+
+                console.log(parsedJSON.ListaCategoria);
+                return ({Id_categoria: item.ID, _Categoria:item.Descricao });
+            });
+
+            ListaUsuario = ko.utils.arrayMap(parsedJSON.ListaUsuario, function(item) {
+
+                return ({Id_usuario: item.ID, _Usuario:item.Login });
+            });
+
+
+            self.salva_assunto=  function (data) {
+ 
+                $.ajax({
+                    url: '@Url.Action("Edit")',
+                    type: 'post',
+                    dataType: 'json',
+                    data:ko.toJSON(screenModel),
+                    contentType: 'application/json',
+                    success: function (data) {
+
+                        if(screenModel.ID == 0)
+                        {
+
+                            controle.showSuccessPopup('ASSUNTO SUPORTE', 'ASSUNTO Cadastrado com sucesso!','@Url.Action("Index")');
+                        }
+                        else
+                        {
+                            controle.showSuccessPopup('ASSUNTO SUPORTE', 'ASSUNTO alterado com sucesso!','@Url.Action("Index")');
+                        }
+                    },
+
+                });
+
+            };
+            ko.validation.init({
+                registerExtenders: true,
+                messagesOnModified: true,
+                insertMessages: false,
+                decorateElement: true
+            });
+        };
+        var assuntoModel = function (assunto){
+
+            self=this,
+            self.ID = ko.observable(assunto.ID);
+            self.ID_Usuario= ko.observable(assunto.ID_Usuario).extend({required:true}); // == null ? false : self.ID_Usuario).extend({required:true});
+            self.ID_Categoria= ko.observable(assunto.ID_Categoria).extend({required:true}); //== null ? false : self.ID_Categoria).extend({required:true});
+            self.Descricao = ko.observable(assunto.Descricao).extend({required:true});
+            self.Link_Manual = ko.observable(assunto.Link_Manual);
+            self.Link_Video = ko.observable(assunto.Link_Video);
+            
+        }
+
+        var screenModel = new ScreenModel();
+        ko.applyBindings(screenModel);
+
+    </script>
+}

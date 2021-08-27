@@ -1,0 +1,85 @@
+﻿@*@model Entities.Grupo*@
+
+<h2>Cadastro Grupo</h2>
+
+</br>
+
+<fieldset>
+    <form  data-bind="with: Grupo">
+        <div class="well">
+            <div class="row">
+                <div class="form-group col-md-12">
+                    <label>Descrição</label>
+                    <input type="text" class="form-control" data-bind="value:Descricao" placeholder="Digite seu nome">
+                </div>
+
+
+                <div class="form-group col-md-12">
+                    <button type="button" class="btn btn-primary btn-sm" data-bind="click: salva_grupo">Salvar</button>
+
+                </div>
+            </div>
+        </div>
+    </form>
+
+</fieldset>
+<div>
+    @Html.ActionLink("Voltar", "Index", null, new { @class = "btn btn-default btn-sm" })
+</div>
+
+@section Scripts {
+
+
+    <script>
+
+        var parsedJSON = @Html.Raw(Json.Encode(Model));
+         var ScreenModel = function () {
+
+             self = this,
+             self.Grupo = new grupoModel(parsedJSON);
+            
+             
+            self.salva_grupo=  function (data) {
+               
+                controle.blockUI();
+
+                $.ajax({
+                    url: '@Url.Action("Edit/")',
+                    type: 'post',
+                    dataType: 'json',
+                    data:ko.toJSON(screenModel),
+                    contentType: 'application/json',
+                    success: function (data) {
+
+                        if(screenModel.ID == 0)
+                        {
+                            console.log(self.ID);
+                            controle.showSuccessPopup('GRUPO', 'Grupo Cadastrado com sucesso!','@Url.Action("Index")');
+                        }
+                        else
+                        {
+                            controle.showSuccessPopup('GRUPO', 'Grupo alterado com sucesso!','@Url.Action("Index")');
+                        }
+                    },
+                    complete: function () {
+                        controle.unblockUI();
+                    }
+                });
+
+            };
+
+        };
+        
+        var grupoModel = function(grupo)
+        {       
+            
+            self = this,
+            self.ID = ko.observable(grupo.ID),
+            self.Descricao = ko.observable(grupo.Descricao).extend({required:true});
+        }
+
+        var screenModel = new ScreenModel();
+        ko.applyBindings(screenModel);
+            
+    </script>
+}

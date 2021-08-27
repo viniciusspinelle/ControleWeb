@@ -1,0 +1,83 @@
+﻿<h2>Assunto Suporte </h2>
+<div class="well">
+    <p>
+        @Html.ActionLink("Criar Categoria", "Edit", null, new { @class = "btn btn-primary btn-sm" })
+    </p>
+</div>
+
+<table id="example" class="table-bordered" cellspacing="0">
+    <thead>
+        <tr>
+            <th>CATEGORIA</th>
+            <th>DESCRIÇÃO</th>
+            <th>USUARIO</th>
+            <th>DATA</th>
+            <th width="140"></th>
+        </tr>
+    </thead>
+    <tbody></tbody>
+</table>
+
+
+
+<script type="text/javascript">
+
+
+
+    $(document).ready(function () {
+
+        $('#example').DataTable({
+
+            "ajax": {
+                "url": "/AssuntoSuporte/Index",
+                "type": "POST",
+            },
+
+            "columnDefs": [
+               { "className": "dt-center", "targets": "_all" },
+               { 'width': 80, "targets": "0 " }
+            ],
+
+            "aoColumns": [
+                { "data": "CategoriaDescricao" },
+                {
+                    "data": function (row, type, meta) {
+                        return controle.LimitCharacter(row.Descricao);
+                    }
+                },
+                { "data": "UsuarioDescricao" },
+
+               {
+                   "data": function (row, type, meta) {
+                       return controle.formataData(row.Data, "DD/MM/YYYY");
+
+                   }
+               },
+               {
+                   "mRender": function (data, type, row) {
+                       var edit = '<a class="btn btn-warning btn-sm " href="' + '@Url.Action("Edit")/' + row.ID + '">' + 'Editar' + '</a>'
+                       var deletar = '<a class="btn btn-danger btn-sm " href="' + '@Url.Action("Delete")/' + row.ID + '">' + 'Deletar' + '</a>'
+
+
+                       return edit + "  " + deletar;
+                   },
+               }
+            ],
+            "oLanguage": {
+                "sLengthMenu": "Mostrar _MENU_ registros por página",
+                "sZeroRecords": "Nenhum registro encontrado",
+                "sInfo": "Mostrando _START_ / _END_ de _TOTAL_ registro(s)",
+                "sInfoEmpty": "Mostrando 0 / 0 de 0 registros",
+                "sInfoFiltered": "(filtrado de _MAX_ registros)",
+                "sSearch": "Pesquisar: ",
+                "oPaginate": {
+                    "sFirst": "Início",
+                    "sPrevious": "Anterior",
+                    "sNext": "Próximo",
+                    "sLast": "Último"
+                }
+            }
+        });
+
+    });
+</script>

@@ -1,0 +1,1018 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="CONTROLEModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="ASSUNTO_SUPORTE">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID_CATEGORIA" Type="bigint" Nullable="false" />
+          <Property Name="ID_USUARIO" Type="bigint" Nullable="false" />
+          <Property Name="DESCRICAO" Type="varchar" MaxLength="200" />
+          <Property Name="LINK_MANUAL" Type="varchar" MaxLength="100" />
+          <Property Name="LINK_VIDEO" Type="varchar" MaxLength="100" />
+          <Property Name="DATA" Type="date" />
+        </EntityType>
+        <EntityType Name="CATEGORIA_SUPORTE">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID_PROJETO" Type="bigint" Nullable="false" />
+          <Property Name="DESCRICAO" Type="varchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="CLIENTE">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID_PROJETO" Type="bigint" Nullable="false" />
+          <Property Name="RAZAOSOCIAL" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="CPFCNPJ" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="NOME_FANTASIA" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="EMAIL" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="ENDERECO" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="NUMERO" Type="varchar" MaxLength="4" Nullable="false" />
+          <Property Name="BAIRRO" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="CIDADE" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ESTADO" Type="varchar" MaxLength="2" Nullable="false" />
+          <Property Name="CEP" Type="varchar" MaxLength="12" Nullable="false" />
+          <Property Name="CONTATO" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="EMAIL_CLIENTE">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID_CLIENTE" Type="bigint" Nullable="false" />
+          <Property Name="EMAIL" Type="varchar" MaxLength="50" />
+          <Property Name="PRINCIPAL" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="EMPRESA">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NOME" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="CPFCNPJ" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="EMAIL" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="CELULAR" Type="varchar" MaxLength="12" Nullable="false" />
+          <Property Name="TELEFONE" Type="varchar" MaxLength="12" Nullable="false" />
+          <Property Name="ENDERECO" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="NUMERO" Type="varchar" MaxLength="4" Nullable="false" />
+          <Property Name="BAIRRO" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="CIDADE" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ESTADO" Type="varchar" MaxLength="2" Nullable="false" />
+          <Property Name="CEP" Type="varchar" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <EntityType Name="GRUPO">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DESCRICAO" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="HISTORICO_SUPORTE">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID_CLIENTE" Type="bigint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="HISTORICO_SUPORTE_ITENS">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID_HISTORICO_SUPORTE" Type="bigint" Nullable="false" />
+          <Property Name="ID_ASSUNTO_SUPORTE" Type="bigint" Nullable="false" />
+          <Property Name="ID_USUARIO" Type="bigint" Nullable="false" />
+          <Property Name="NOME_CLIENTE" Type="varchar" MaxLength="50" />
+          <Property Name="CLINICA_CLIENTE" Type="varchar" MaxLength="50" />
+          <Property Name="DATA" Type="date" />
+          <Property Name="OBSERVACAO" Type="varchar" MaxLength="150" />
+          <Property Name="ID_CATEGORIA_SUPORTE" Type="bigint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PROJETO">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID_EMPRESA" Type="bigint" Nullable="false" />
+          <Property Name="DESCRICAO" Type="varchar" MaxLength="50" />
+          <Property Name="DATA" Type="date" />
+        </EntityType>
+        <EntityType Name="TELEFONE_CLIENTE">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID_CLIENTE" Type="bigint" Nullable="false" />
+          <Property Name="TELEFONE" Type="varchar" MaxLength="11" />
+          <Property Name="RESPONSAVEL" Type="varchar" MaxLength="50" />
+          <Property Name="PRINCIPAL" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="USUARIO">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID_EMPRESA" Type="bigint" Nullable="false" />
+          <Property Name="ID_GRUPO" Type="bigint" Nullable="false" />
+          <Property Name="LOGINN" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="SENHA" Type="varchar" MaxLength="6" Nullable="false" />
+          <Property Name="SUPERVISOR" Type="bit" Nullable="false" />
+          <Property Name="EMAIL" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="USUARIO_PROJETO">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID_USUARIO" Type="bigint" Nullable="false" />
+          <Property Name="ID_PROJETO" Type="bigint" />
+        </EntityType>
+        <Association Name="FK__ASSUNTO_S__ID_CA__6A30C649">
+          <End Role="CATEGORIA_SUPORTE" Type="Self.CATEGORIA_SUPORTE" Multiplicity="1" />
+          <End Role="ASSUNTO_SUPORTE" Type="Self.ASSUNTO_SUPORTE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CATEGORIA_SUPORTE">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ASSUNTO_SUPORTE">
+              <PropertyRef Name="ID_CATEGORIA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ASSUNTO_S__ID_US__6B24EA82">
+          <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="1" />
+          <End Role="ASSUNTO_SUPORTE" Type="Self.ASSUNTO_SUPORTE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USUARIO">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ASSUNTO_SUPORTE">
+              <PropertyRef Name="ID_USUARIO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__CATEGORIA__ID_PR__5DCAEF64">
+          <End Role="PROJETO" Type="Self.PROJETO" Multiplicity="1" />
+          <End Role="CATEGORIA_SUPORTE" Type="Self.CATEGORIA_SUPORTE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PROJETO">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="CATEGORIA_SUPORTE">
+              <PropertyRef Name="ID_PROJETO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__CLIENTE__ID_PROJ__5812160E">
+          <End Role="PROJETO" Type="Self.PROJETO" Multiplicity="1" />
+          <End Role="CLIENTE" Type="Self.CLIENTE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PROJETO">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="CLIENTE">
+              <PropertyRef Name="ID_PROJETO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__EMAIL_CLI__ID_CL__6383C8BA">
+          <End Role="CLIENTE" Type="Self.CLIENTE" Multiplicity="1" />
+          <End Role="EMAIL_CLIENTE" Type="Self.EMAIL_CLIENTE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CLIENTE">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="EMAIL_CLIENTE">
+              <PropertyRef Name="ID_CLIENTE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__HISTORICO__ID_AS__6EF57B66">
+          <End Role="ASSUNTO_SUPORTE" Type="Self.ASSUNTO_SUPORTE" Multiplicity="1" />
+          <End Role="HISTORICO_SUPORTE_ITENS" Type="Self.HISTORICO_SUPORTE_ITENS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ASSUNTO_SUPORTE">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="HISTORICO_SUPORTE_ITENS">
+              <PropertyRef Name="ID_ASSUNTO_SUPORTE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__HISTORICO__ID_CA__70DDC3D8">
+          <End Role="CATEGORIA_SUPORTE" Type="Self.CATEGORIA_SUPORTE" Multiplicity="1" />
+          <End Role="HISTORICO_SUPORTE_ITENS" Type="Self.HISTORICO_SUPORTE_ITENS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CATEGORIA_SUPORTE">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="HISTORICO_SUPORTE_ITENS">
+              <PropertyRef Name="ID_CATEGORIA_SUPORTE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__HISTORICO__ID_CL__5AEE82B9">
+          <End Role="CLIENTE" Type="Self.CLIENTE" Multiplicity="1" />
+          <End Role="HISTORICO_SUPORTE" Type="Self.HISTORICO_SUPORTE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CLIENTE">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="HISTORICO_SUPORTE">
+              <PropertyRef Name="ID_CLIENTE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__HISTORICO__ID_HI__6E01572D">
+          <End Role="HISTORICO_SUPORTE" Type="Self.HISTORICO_SUPORTE" Multiplicity="1" />
+          <End Role="HISTORICO_SUPORTE_ITENS" Type="Self.HISTORICO_SUPORTE_ITENS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HISTORICO_SUPORTE">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="HISTORICO_SUPORTE_ITENS">
+              <PropertyRef Name="ID_HISTORICO_SUPORTE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__HISTORICO__ID_US__6FE99F9F">
+          <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="1" />
+          <End Role="HISTORICO_SUPORTE_ITENS" Type="Self.HISTORICO_SUPORTE_ITENS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USUARIO">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="HISTORICO_SUPORTE_ITENS">
+              <PropertyRef Name="ID_USUARIO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PROJETO__ID_EMPR__5165187F">
+          <End Role="EMPRESA" Type="Self.EMPRESA" Multiplicity="1" />
+          <End Role="PROJETO" Type="Self.PROJETO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EMPRESA">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PROJETO">
+              <PropertyRef Name="ID_EMPRESA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__TELEFONE___ID_CL__60A75C0F">
+          <End Role="CLIENTE" Type="Self.CLIENTE" Multiplicity="1" />
+          <End Role="TELEFONE_CLIENTE" Type="Self.TELEFONE_CLIENTE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CLIENTE">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TELEFONE_CLIENTE">
+              <PropertyRef Name="ID_CLIENTE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__USUARIO__ID_EMPR__4D94879B">
+          <End Role="EMPRESA" Type="Self.EMPRESA" Multiplicity="1" />
+          <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EMPRESA">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="USUARIO">
+              <PropertyRef Name="ID_EMPRESA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__USUARIO__ID_GRUP__4E88ABD4">
+          <End Role="GRUPO" Type="Self.GRUPO" Multiplicity="1" />
+          <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GRUPO">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="USUARIO">
+              <PropertyRef Name="ID_GRUPO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__USUARIO_P__ID_PR__5535A963">
+          <End Role="PROJETO" Type="Self.PROJETO" Multiplicity="0..1" />
+          <End Role="USUARIO_PROJETO" Type="Self.USUARIO_PROJETO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PROJETO">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="USUARIO_PROJETO">
+              <PropertyRef Name="ID_PROJETO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__USUARIO_P__ID_US__5441852A">
+          <End Role="USUARIO" Type="Self.USUARIO" Multiplicity="1" />
+          <End Role="USUARIO_PROJETO" Type="Self.USUARIO_PROJETO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USUARIO">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="USUARIO_PROJETO">
+              <PropertyRef Name="ID_USUARIO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="CONTROLEModelStoreContainer">
+          <EntitySet Name="ASSUNTO_SUPORTE" EntityType="Self.ASSUNTO_SUPORTE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CATEGORIA_SUPORTE" EntityType="Self.CATEGORIA_SUPORTE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CLIENTE" EntityType="Self.CLIENTE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EMAIL_CLIENTE" EntityType="Self.EMAIL_CLIENTE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EMPRESA" EntityType="Self.EMPRESA" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="GRUPO" EntityType="Self.GRUPO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HISTORICO_SUPORTE" EntityType="Self.HISTORICO_SUPORTE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HISTORICO_SUPORTE_ITENS" EntityType="Self.HISTORICO_SUPORTE_ITENS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PROJETO" EntityType="Self.PROJETO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TELEFONE_CLIENTE" EntityType="Self.TELEFONE_CLIENTE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="USUARIO" EntityType="Self.USUARIO" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="USUARIO_PROJETO" EntityType="Self.USUARIO_PROJETO" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__ASSUNTO_S__ID_CA__6A30C649" Association="Self.FK__ASSUNTO_S__ID_CA__6A30C649">
+            <End Role="CATEGORIA_SUPORTE" EntitySet="CATEGORIA_SUPORTE" />
+            <End Role="ASSUNTO_SUPORTE" EntitySet="ASSUNTO_SUPORTE" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ASSUNTO_S__ID_US__6B24EA82" Association="Self.FK__ASSUNTO_S__ID_US__6B24EA82">
+            <End Role="USUARIO" EntitySet="USUARIO" />
+            <End Role="ASSUNTO_SUPORTE" EntitySet="ASSUNTO_SUPORTE" />
+          </AssociationSet>
+          <AssociationSet Name="FK__CATEGORIA__ID_PR__5DCAEF64" Association="Self.FK__CATEGORIA__ID_PR__5DCAEF64">
+            <End Role="PROJETO" EntitySet="PROJETO" />
+            <End Role="CATEGORIA_SUPORTE" EntitySet="CATEGORIA_SUPORTE" />
+          </AssociationSet>
+          <AssociationSet Name="FK__CLIENTE__ID_PROJ__5812160E" Association="Self.FK__CLIENTE__ID_PROJ__5812160E">
+            <End Role="PROJETO" EntitySet="PROJETO" />
+            <End Role="CLIENTE" EntitySet="CLIENTE" />
+          </AssociationSet>
+          <AssociationSet Name="FK__EMAIL_CLI__ID_CL__6383C8BA" Association="Self.FK__EMAIL_CLI__ID_CL__6383C8BA">
+            <End Role="CLIENTE" EntitySet="CLIENTE" />
+            <End Role="EMAIL_CLIENTE" EntitySet="EMAIL_CLIENTE" />
+          </AssociationSet>
+          <AssociationSet Name="FK__HISTORICO__ID_AS__6EF57B66" Association="Self.FK__HISTORICO__ID_AS__6EF57B66">
+            <End Role="ASSUNTO_SUPORTE" EntitySet="ASSUNTO_SUPORTE" />
+            <End Role="HISTORICO_SUPORTE_ITENS" EntitySet="HISTORICO_SUPORTE_ITENS" />
+          </AssociationSet>
+          <AssociationSet Name="FK__HISTORICO__ID_CA__70DDC3D8" Association="Self.FK__HISTORICO__ID_CA__70DDC3D8">
+            <End Role="CATEGORIA_SUPORTE" EntitySet="CATEGORIA_SUPORTE" />
+            <End Role="HISTORICO_SUPORTE_ITENS" EntitySet="HISTORICO_SUPORTE_ITENS" />
+          </AssociationSet>
+          <AssociationSet Name="FK__HISTORICO__ID_CL__5AEE82B9" Association="Self.FK__HISTORICO__ID_CL__5AEE82B9">
+            <End Role="CLIENTE" EntitySet="CLIENTE" />
+            <End Role="HISTORICO_SUPORTE" EntitySet="HISTORICO_SUPORTE" />
+          </AssociationSet>
+          <AssociationSet Name="FK__HISTORICO__ID_HI__6E01572D" Association="Self.FK__HISTORICO__ID_HI__6E01572D">
+            <End Role="HISTORICO_SUPORTE" EntitySet="HISTORICO_SUPORTE" />
+            <End Role="HISTORICO_SUPORTE_ITENS" EntitySet="HISTORICO_SUPORTE_ITENS" />
+          </AssociationSet>
+          <AssociationSet Name="FK__HISTORICO__ID_US__6FE99F9F" Association="Self.FK__HISTORICO__ID_US__6FE99F9F">
+            <End Role="USUARIO" EntitySet="USUARIO" />
+            <End Role="HISTORICO_SUPORTE_ITENS" EntitySet="HISTORICO_SUPORTE_ITENS" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PROJETO__ID_EMPR__5165187F" Association="Self.FK__PROJETO__ID_EMPR__5165187F">
+            <End Role="EMPRESA" EntitySet="EMPRESA" />
+            <End Role="PROJETO" EntitySet="PROJETO" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TELEFONE___ID_CL__60A75C0F" Association="Self.FK__TELEFONE___ID_CL__60A75C0F">
+            <End Role="CLIENTE" EntitySet="CLIENTE" />
+            <End Role="TELEFONE_CLIENTE" EntitySet="TELEFONE_CLIENTE" />
+          </AssociationSet>
+          <AssociationSet Name="FK__USUARIO__ID_EMPR__4D94879B" Association="Self.FK__USUARIO__ID_EMPR__4D94879B">
+            <End Role="EMPRESA" EntitySet="EMPRESA" />
+            <End Role="USUARIO" EntitySet="USUARIO" />
+          </AssociationSet>
+          <AssociationSet Name="FK__USUARIO__ID_GRUP__4E88ABD4" Association="Self.FK__USUARIO__ID_GRUP__4E88ABD4">
+            <End Role="GRUPO" EntitySet="GRUPO" />
+            <End Role="USUARIO" EntitySet="USUARIO" />
+          </AssociationSet>
+          <AssociationSet Name="FK__USUARIO_P__ID_PR__5535A963" Association="Self.FK__USUARIO_P__ID_PR__5535A963">
+            <End Role="PROJETO" EntitySet="PROJETO" />
+            <End Role="USUARIO_PROJETO" EntitySet="USUARIO_PROJETO" />
+          </AssociationSet>
+          <AssociationSet Name="FK__USUARIO_P__ID_US__5441852A" Association="Self.FK__USUARIO_P__ID_US__5441852A">
+            <End Role="USUARIO" EntitySet="USUARIO" />
+            <End Role="USUARIO_PROJETO" EntitySet="USUARIO_PROJETO" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="CONTROLEModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="CONTROLEEEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="ASSUNTO_SUPORTE" EntityType="CONTROLEModel.ASSUNTO_SUPORTE" />
+          <EntitySet Name="CATEGORIA_SUPORTE" EntityType="CONTROLEModel.CATEGORIA_SUPORTE" />
+          <EntitySet Name="EMAIL_CLIENTE" EntityType="CONTROLEModel.EMAIL_CLIENTE" />
+          <EntitySet Name="EMPRESA" EntityType="CONTROLEModel.EMPRESA" />
+          <EntitySet Name="GRUPO" EntityType="CONTROLEModel.GRUPO" />
+          <EntitySet Name="HISTORICO_SUPORTE" EntityType="CONTROLEModel.HISTORICO_SUPORTE" />
+          <EntitySet Name="HISTORICO_SUPORTE_ITENS" EntityType="CONTROLEModel.HISTORICO_SUPORTE_ITENS" />
+          <EntitySet Name="PROJETO" EntityType="CONTROLEModel.PROJETO" />
+          <EntitySet Name="TELEFONE_CLIENTE" EntityType="CONTROLEModel.TELEFONE_CLIENTE" />
+          <EntitySet Name="USUARIO_PROJETO" EntityType="CONTROLEModel.USUARIO_PROJETO" />
+          <AssociationSet Name="FK__ASSUNTO_S__ID_CA__6A30C649" Association="CONTROLEModel.FK__ASSUNTO_S__ID_CA__6A30C649">
+            <End Role="CATEGORIA_SUPORTE" EntitySet="CATEGORIA_SUPORTE" />
+            <End Role="ASSUNTO_SUPORTE" EntitySet="ASSUNTO_SUPORTE" />
+          </AssociationSet>
+          <AssociationSet Name="FK__HISTORICO__ID_AS__6EF57B66" Association="CONTROLEModel.FK__HISTORICO__ID_AS__6EF57B66">
+            <End Role="ASSUNTO_SUPORTE" EntitySet="ASSUNTO_SUPORTE" />
+            <End Role="HISTORICO_SUPORTE_ITENS" EntitySet="HISTORICO_SUPORTE_ITENS" />
+          </AssociationSet>
+          <AssociationSet Name="FK__CATEGORIA__ID_PR__5DCAEF64" Association="CONTROLEModel.FK__CATEGORIA__ID_PR__5DCAEF64">
+            <End Role="PROJETO" EntitySet="PROJETO" />
+            <End Role="CATEGORIA_SUPORTE" EntitySet="CATEGORIA_SUPORTE" />
+          </AssociationSet>
+          <AssociationSet Name="FK__HISTORICO__ID_CA__70DDC3D8" Association="CONTROLEModel.FK__HISTORICO__ID_CA__70DDC3D8">
+            <End Role="CATEGORIA_SUPORTE" EntitySet="CATEGORIA_SUPORTE" />
+            <End Role="HISTORICO_SUPORTE_ITENS" EntitySet="HISTORICO_SUPORTE_ITENS" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PROJETO__ID_EMPR__5165187F" Association="CONTROLEModel.FK__PROJETO__ID_EMPR__5165187F">
+            <End Role="EMPRESA" EntitySet="EMPRESA" />
+            <End Role="PROJETO" EntitySet="PROJETO" />
+          </AssociationSet>
+          <AssociationSet Name="FK__HISTORICO__ID_HI__6E01572D" Association="CONTROLEModel.FK__HISTORICO__ID_HI__6E01572D">
+            <End Role="HISTORICO_SUPORTE" EntitySet="HISTORICO_SUPORTE" />
+            <End Role="HISTORICO_SUPORTE_ITENS" EntitySet="HISTORICO_SUPORTE_ITENS" />
+          </AssociationSet>
+          <AssociationSet Name="FK__USUARIO_P__ID_PR__5535A963" Association="CONTROLEModel.FK__USUARIO_P__ID_PR__5535A963">
+            <End Role="PROJETO" EntitySet="PROJETO" />
+            <End Role="USUARIO_PROJETO" EntitySet="USUARIO_PROJETO" />
+          </AssociationSet>
+          <EntitySet Name="CLIENTE" EntityType="CONTROLEModel.CLIENTE" />
+          <AssociationSet Name="FK__CLIENTE__ID_PROJ__5812160E" Association="CONTROLEModel.FK__CLIENTE__ID_PROJ__5812160E">
+            <End Role="PROJETO" EntitySet="PROJETO" />
+            <End Role="CLIENTE" EntitySet="CLIENTE" />
+          </AssociationSet>
+          <AssociationSet Name="FK__EMAIL_CLI__ID_CL__6383C8BA" Association="CONTROLEModel.FK__EMAIL_CLI__ID_CL__6383C8BA">
+            <End Role="CLIENTE" EntitySet="CLIENTE" />
+            <End Role="EMAIL_CLIENTE" EntitySet="EMAIL_CLIENTE" />
+          </AssociationSet>
+          <AssociationSet Name="FK__HISTORICO__ID_CL__5AEE82B9" Association="CONTROLEModel.FK__HISTORICO__ID_CL__5AEE82B9">
+            <End Role="CLIENTE" EntitySet="CLIENTE" />
+            <End Role="HISTORICO_SUPORTE" EntitySet="HISTORICO_SUPORTE" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TELEFONE___ID_CL__60A75C0F" Association="CONTROLEModel.FK__TELEFONE___ID_CL__60A75C0F">
+            <End Role="CLIENTE" EntitySet="CLIENTE" />
+            <End Role="TELEFONE_CLIENTE" EntitySet="TELEFONE_CLIENTE" />
+          </AssociationSet>
+          <EntitySet Name="USUARIO" EntityType="CONTROLEModel.USUARIO" />
+          <AssociationSet Name="FK__ASSUNTO_S__ID_US__6B24EA82" Association="CONTROLEModel.FK__ASSUNTO_S__ID_US__6B24EA82">
+            <End Role="USUARIO" EntitySet="USUARIO" />
+            <End Role="ASSUNTO_SUPORTE" EntitySet="ASSUNTO_SUPORTE" />
+          </AssociationSet>
+          <AssociationSet Name="FK__USUARIO__ID_EMPR__4D94879B" Association="CONTROLEModel.FK__USUARIO__ID_EMPR__4D94879B">
+            <End Role="EMPRESA" EntitySet="EMPRESA" />
+            <End Role="USUARIO" EntitySet="USUARIO" />
+          </AssociationSet>
+          <AssociationSet Name="FK__USUARIO__ID_GRUP__4E88ABD4" Association="CONTROLEModel.FK__USUARIO__ID_GRUP__4E88ABD4">
+            <End Role="GRUPO" EntitySet="GRUPO" />
+            <End Role="USUARIO" EntitySet="USUARIO" />
+          </AssociationSet>
+          <AssociationSet Name="FK__HISTORICO__ID_US__6FE99F9F" Association="CONTROLEModel.FK__HISTORICO__ID_US__6FE99F9F">
+            <End Role="USUARIO" EntitySet="USUARIO" />
+            <End Role="HISTORICO_SUPORTE_ITENS" EntitySet="HISTORICO_SUPORTE_ITENS" />
+          </AssociationSet>
+          <AssociationSet Name="FK__USUARIO_P__ID_US__5441852A" Association="CONTROLEModel.FK__USUARIO_P__ID_US__5441852A">
+            <End Role="USUARIO" EntitySet="USUARIO" />
+            <End Role="USUARIO_PROJETO" EntitySet="USUARIO_PROJETO" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="ASSUNTO_SUPORTE">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_CATEGORIA" Type="Int64" Nullable="false" />
+          <Property Name="ID_USUARIO" Type="Int64" Nullable="false" />
+          <Property Name="DESCRICAO" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="LINK_MANUAL" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="LINK_VIDEO" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="DATA" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="CATEGORIA_SUPORTE" Relationship="CONTROLEModel.FK__ASSUNTO_S__ID_CA__6A30C649" FromRole="ASSUNTO_SUPORTE" ToRole="CATEGORIA_SUPORTE" />
+          <NavigationProperty Name="HISTORICO_SUPORTE_ITENS" Relationship="CONTROLEModel.FK__HISTORICO__ID_AS__6EF57B66" FromRole="ASSUNTO_SUPORTE" ToRole="HISTORICO_SUPORTE_ITENS" />
+          <NavigationProperty Name="USUARIO" Relationship="CONTROLEModel.FK__ASSUNTO_S__ID_US__6B24EA82" FromRole="ASSUNTO_SUPORTE" ToRole="USUARIO" />
+        </EntityType>
+        <EntityType Name="CATEGORIA_SUPORTE">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_PROJETO" Type="Int64" Nullable="false" />
+          <Property Name="DESCRICAO" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="ASSUNTO_SUPORTE" Relationship="CONTROLEModel.FK__ASSUNTO_S__ID_CA__6A30C649" FromRole="CATEGORIA_SUPORTE" ToRole="ASSUNTO_SUPORTE" />
+          <NavigationProperty Name="PROJETO" Relationship="CONTROLEModel.FK__CATEGORIA__ID_PR__5DCAEF64" FromRole="CATEGORIA_SUPORTE" ToRole="PROJETO" />
+          <NavigationProperty Name="HISTORICO_SUPORTE_ITENS" Relationship="CONTROLEModel.FK__HISTORICO__ID_CA__70DDC3D8" FromRole="CATEGORIA_SUPORTE" ToRole="HISTORICO_SUPORTE_ITENS" />
+        </EntityType>
+        <EntityType Name="EMAIL_CLIENTE">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_CLIENTE" Type="Int64" Nullable="false" />
+          <Property Name="EMAIL" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PRINCIPAL" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="CLIENTE" Relationship="CONTROLEModel.FK__EMAIL_CLI__ID_CL__6383C8BA" FromRole="EMAIL_CLIENTE" ToRole="CLIENTE" />
+        </EntityType>
+        <EntityType Name="EMPRESA">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NOME" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CPFCNPJ" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="EMAIL" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="CELULAR" Type="String" Nullable="false" MaxLength="12" FixedLength="false" Unicode="false" />
+          <Property Name="TELEFONE" Type="String" Nullable="false" MaxLength="12" FixedLength="false" Unicode="false" />
+          <Property Name="ENDERECO" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="NUMERO" Type="String" Nullable="false" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Name="BAIRRO" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CIDADE" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ESTADO" Type="String" Nullable="false" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="CEP" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="PROJETO" Relationship="CONTROLEModel.FK__PROJETO__ID_EMPR__5165187F" FromRole="EMPRESA" ToRole="PROJETO" />
+          <NavigationProperty Name="USUARIO" Relationship="CONTROLEModel.FK__USUARIO__ID_EMPR__4D94879B" FromRole="EMPRESA" ToRole="USUARIO" />
+        </EntityType>
+        <EntityType Name="GRUPO">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DESCRICAO" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="USUARIO" Relationship="CONTROLEModel.FK__USUARIO__ID_GRUP__4E88ABD4" FromRole="GRUPO" ToRole="USUARIO" />
+        </EntityType>
+        <EntityType Name="HISTORICO_SUPORTE">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_CLIENTE" Type="Int64" Nullable="false" />
+          <NavigationProperty Name="HISTORICO_SUPORTE_ITENS" Relationship="CONTROLEModel.FK__HISTORICO__ID_HI__6E01572D" FromRole="HISTORICO_SUPORTE" ToRole="HISTORICO_SUPORTE_ITENS" />
+          <NavigationProperty Name="CLIENTE" Relationship="CONTROLEModel.FK__HISTORICO__ID_CL__5AEE82B9" FromRole="HISTORICO_SUPORTE" ToRole="CLIENTE" />
+        </EntityType>
+        <EntityType Name="HISTORICO_SUPORTE_ITENS">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_HISTORICO_SUPORTE" Type="Int64" Nullable="false" />
+          <Property Name="ID_ASSUNTO_SUPORTE" Type="Int64" Nullable="false" />
+          <Property Name="ID_USUARIO" Type="Int64" Nullable="false" />
+          <Property Name="NOME_CLIENTE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CLINICA_CLIENTE" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DATA" Type="DateTime" Precision="0" />
+          <Property Name="OBSERVACAO" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="ID_CATEGORIA_SUPORTE" Type="Int64" Nullable="false" />
+          <NavigationProperty Name="ASSUNTO_SUPORTE" Relationship="CONTROLEModel.FK__HISTORICO__ID_AS__6EF57B66" FromRole="HISTORICO_SUPORTE_ITENS" ToRole="ASSUNTO_SUPORTE" />
+          <NavigationProperty Name="CATEGORIA_SUPORTE" Relationship="CONTROLEModel.FK__HISTORICO__ID_CA__70DDC3D8" FromRole="HISTORICO_SUPORTE_ITENS" ToRole="CATEGORIA_SUPORTE" />
+          <NavigationProperty Name="HISTORICO_SUPORTE" Relationship="CONTROLEModel.FK__HISTORICO__ID_HI__6E01572D" FromRole="HISTORICO_SUPORTE_ITENS" ToRole="HISTORICO_SUPORTE" />
+          <NavigationProperty Name="USUARIO" Relationship="CONTROLEModel.FK__HISTORICO__ID_US__6FE99F9F" FromRole="HISTORICO_SUPORTE_ITENS" ToRole="USUARIO" />
+        </EntityType>
+        <EntityType Name="PROJETO">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_EMPRESA" Type="Int64" Nullable="false" />
+          <Property Name="DESCRICAO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DATA" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="CATEGORIA_SUPORTE" Relationship="CONTROLEModel.FK__CATEGORIA__ID_PR__5DCAEF64" FromRole="PROJETO" ToRole="CATEGORIA_SUPORTE" />
+          <NavigationProperty Name="EMPRESA" Relationship="CONTROLEModel.FK__PROJETO__ID_EMPR__5165187F" FromRole="PROJETO" ToRole="EMPRESA" />
+          <NavigationProperty Name="USUARIO_PROJETO" Relationship="CONTROLEModel.FK__USUARIO_P__ID_PR__5535A963" FromRole="PROJETO" ToRole="USUARIO_PROJETO" />
+          <NavigationProperty Name="CLIENTE" Relationship="CONTROLEModel.FK__CLIENTE__ID_PROJ__5812160E" FromRole="PROJETO" ToRole="CLIENTE" />
+        </EntityType>
+        <EntityType Name="TELEFONE_CLIENTE">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_CLIENTE" Type="Int64" Nullable="false" />
+          <Property Name="TELEFONE" Type="String" MaxLength="11" FixedLength="false" Unicode="false" />
+          <Property Name="RESPONSAVEL" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PRINCIPAL" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="CLIENTE" Relationship="CONTROLEModel.FK__TELEFONE___ID_CL__60A75C0F" FromRole="TELEFONE_CLIENTE" ToRole="CLIENTE" />
+        </EntityType>
+        <EntityType Name="USUARIO_PROJETO">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_USUARIO" Type="Int64" Nullable="false" />
+          <Property Name="ID_PROJETO" Type="Int64" />
+          <NavigationProperty Name="PROJETO" Relationship="CONTROLEModel.FK__USUARIO_P__ID_PR__5535A963" FromRole="USUARIO_PROJETO" ToRole="PROJETO" />
+          <NavigationProperty Name="USUARIO" Relationship="CONTROLEModel.FK__USUARIO_P__ID_US__5441852A" FromRole="USUARIO_PROJETO" ToRole="USUARIO" />
+        </EntityType>
+        <Association Name="FK__ASSUNTO_S__ID_CA__6A30C649">
+          <End Type="CONTROLEModel.CATEGORIA_SUPORTE" Role="CATEGORIA_SUPORTE" Multiplicity="1" />
+          <End Type="CONTROLEModel.ASSUNTO_SUPORTE" Role="ASSUNTO_SUPORTE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CATEGORIA_SUPORTE">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ASSUNTO_SUPORTE">
+              <PropertyRef Name="ID_CATEGORIA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__HISTORICO__ID_AS__6EF57B66">
+          <End Type="CONTROLEModel.ASSUNTO_SUPORTE" Role="ASSUNTO_SUPORTE" Multiplicity="1" />
+          <End Type="CONTROLEModel.HISTORICO_SUPORTE_ITENS" Role="HISTORICO_SUPORTE_ITENS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ASSUNTO_SUPORTE">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="HISTORICO_SUPORTE_ITENS">
+              <PropertyRef Name="ID_ASSUNTO_SUPORTE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__CATEGORIA__ID_PR__5DCAEF64">
+          <End Type="CONTROLEModel.PROJETO" Role="PROJETO" Multiplicity="1" />
+          <End Type="CONTROLEModel.CATEGORIA_SUPORTE" Role="CATEGORIA_SUPORTE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PROJETO">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="CATEGORIA_SUPORTE">
+              <PropertyRef Name="ID_PROJETO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__HISTORICO__ID_CA__70DDC3D8">
+          <End Type="CONTROLEModel.CATEGORIA_SUPORTE" Role="CATEGORIA_SUPORTE" Multiplicity="1" />
+          <End Type="CONTROLEModel.HISTORICO_SUPORTE_ITENS" Role="HISTORICO_SUPORTE_ITENS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CATEGORIA_SUPORTE">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="HISTORICO_SUPORTE_ITENS">
+              <PropertyRef Name="ID_CATEGORIA_SUPORTE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PROJETO__ID_EMPR__5165187F">
+          <End Type="CONTROLEModel.EMPRESA" Role="EMPRESA" Multiplicity="1" />
+          <End Type="CONTROLEModel.PROJETO" Role="PROJETO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EMPRESA">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="PROJETO">
+              <PropertyRef Name="ID_EMPRESA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__HISTORICO__ID_HI__6E01572D">
+          <End Type="CONTROLEModel.HISTORICO_SUPORTE" Role="HISTORICO_SUPORTE" Multiplicity="1" />
+          <End Type="CONTROLEModel.HISTORICO_SUPORTE_ITENS" Role="HISTORICO_SUPORTE_ITENS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="HISTORICO_SUPORTE">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="HISTORICO_SUPORTE_ITENS">
+              <PropertyRef Name="ID_HISTORICO_SUPORTE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__USUARIO_P__ID_PR__5535A963">
+          <End Type="CONTROLEModel.PROJETO" Role="PROJETO" Multiplicity="0..1" />
+          <End Type="CONTROLEModel.USUARIO_PROJETO" Role="USUARIO_PROJETO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PROJETO">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="USUARIO_PROJETO">
+              <PropertyRef Name="ID_PROJETO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="CLIENTE">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_PROJETO" Type="Int64" Nullable="false" />
+          <Property Name="RAZAOSOCIAL" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CPFCNPJ" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="NOME_FANTASIA" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="EMAIL" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="ENDERECO" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="NUMERO" Type="String" Nullable="false" MaxLength="4" FixedLength="false" Unicode="false" />
+          <Property Name="BAIRRO" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CIDADE" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="ESTADO" Type="String" Nullable="false" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="CEP" Type="String" Nullable="false" MaxLength="12" FixedLength="false" Unicode="false" />
+          <Property Name="CONTATO" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="PROJETO" Relationship="CONTROLEModel.FK__CLIENTE__ID_PROJ__5812160E" FromRole="CLIENTE" ToRole="PROJETO" />
+          <NavigationProperty Name="EMAIL_CLIENTE" Relationship="CONTROLEModel.FK__EMAIL_CLI__ID_CL__6383C8BA" FromRole="CLIENTE" ToRole="EMAIL_CLIENTE" />
+          <NavigationProperty Name="HISTORICO_SUPORTE" Relationship="CONTROLEModel.FK__HISTORICO__ID_CL__5AEE82B9" FromRole="CLIENTE" ToRole="HISTORICO_SUPORTE" />
+          <NavigationProperty Name="TELEFONE_CLIENTE" Relationship="CONTROLEModel.FK__TELEFONE___ID_CL__60A75C0F" FromRole="CLIENTE" ToRole="TELEFONE_CLIENTE" />
+        </EntityType>
+        <Association Name="FK__CLIENTE__ID_PROJ__5812160E">
+          <End Type="CONTROLEModel.PROJETO" Role="PROJETO" Multiplicity="1" />
+          <End Type="CONTROLEModel.CLIENTE" Role="CLIENTE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PROJETO">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="CLIENTE">
+              <PropertyRef Name="ID_PROJETO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__EMAIL_CLI__ID_CL__6383C8BA">
+          <End Type="CONTROLEModel.CLIENTE" Role="CLIENTE" Multiplicity="1" />
+          <End Type="CONTROLEModel.EMAIL_CLIENTE" Role="EMAIL_CLIENTE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CLIENTE">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="EMAIL_CLIENTE">
+              <PropertyRef Name="ID_CLIENTE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__HISTORICO__ID_CL__5AEE82B9">
+          <End Type="CONTROLEModel.CLIENTE" Role="CLIENTE" Multiplicity="1" />
+          <End Type="CONTROLEModel.HISTORICO_SUPORTE" Role="HISTORICO_SUPORTE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CLIENTE">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="HISTORICO_SUPORTE">
+              <PropertyRef Name="ID_CLIENTE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__TELEFONE___ID_CL__60A75C0F">
+          <End Type="CONTROLEModel.CLIENTE" Role="CLIENTE" Multiplicity="1" />
+          <End Type="CONTROLEModel.TELEFONE_CLIENTE" Role="TELEFONE_CLIENTE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CLIENTE">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="TELEFONE_CLIENTE">
+              <PropertyRef Name="ID_CLIENTE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="USUARIO">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_EMPRESA" Type="Int64" Nullable="false" />
+          <Property Name="ID_GRUPO" Type="Int64" Nullable="false" />
+          <Property Name="LOGINN" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="SENHA" Type="String" Nullable="false" MaxLength="6" FixedLength="false" Unicode="false" />
+          <Property Name="SUPERVISOR" Type="Boolean" Nullable="false" />
+          <Property Name="EMAIL" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="ASSUNTO_SUPORTE" Relationship="CONTROLEModel.FK__ASSUNTO_S__ID_US__6B24EA82" FromRole="USUARIO" ToRole="ASSUNTO_SUPORTE" />
+          <NavigationProperty Name="EMPRESA" Relationship="CONTROLEModel.FK__USUARIO__ID_EMPR__4D94879B" FromRole="USUARIO" ToRole="EMPRESA" />
+          <NavigationProperty Name="GRUPO" Relationship="CONTROLEModel.FK__USUARIO__ID_GRUP__4E88ABD4" FromRole="USUARIO" ToRole="GRUPO" />
+          <NavigationProperty Name="HISTORICO_SUPORTE_ITENS" Relationship="CONTROLEModel.FK__HISTORICO__ID_US__6FE99F9F" FromRole="USUARIO" ToRole="HISTORICO_SUPORTE_ITENS" />
+          <NavigationProperty Name="USUARIO_PROJETO" Relationship="CONTROLEModel.FK__USUARIO_P__ID_US__5441852A" FromRole="USUARIO" ToRole="USUARIO_PROJETO" />
+        </EntityType>
+        <Association Name="FK__ASSUNTO_S__ID_US__6B24EA82">
+          <End Type="CONTROLEModel.USUARIO" Role="USUARIO" Multiplicity="1" />
+          <End Type="CONTROLEModel.ASSUNTO_SUPORTE" Role="ASSUNTO_SUPORTE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USUARIO">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ASSUNTO_SUPORTE">
+              <PropertyRef Name="ID_USUARIO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__USUARIO__ID_EMPR__4D94879B">
+          <End Type="CONTROLEModel.EMPRESA" Role="EMPRESA" Multiplicity="1" />
+          <End Type="CONTROLEModel.USUARIO" Role="USUARIO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EMPRESA">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="USUARIO">
+              <PropertyRef Name="ID_EMPRESA" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__USUARIO__ID_GRUP__4E88ABD4">
+          <End Type="CONTROLEModel.GRUPO" Role="GRUPO" Multiplicity="1" />
+          <End Type="CONTROLEModel.USUARIO" Role="USUARIO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GRUPO">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="USUARIO">
+              <PropertyRef Name="ID_GRUPO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__HISTORICO__ID_US__6FE99F9F">
+          <End Type="CONTROLEModel.USUARIO" Role="USUARIO" Multiplicity="1" />
+          <End Type="CONTROLEModel.HISTORICO_SUPORTE_ITENS" Role="HISTORICO_SUPORTE_ITENS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USUARIO">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="HISTORICO_SUPORTE_ITENS">
+              <PropertyRef Name="ID_USUARIO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__USUARIO_P__ID_US__5441852A">
+          <End Type="CONTROLEModel.USUARIO" Role="USUARIO" Multiplicity="1" />
+          <End Type="CONTROLEModel.USUARIO_PROJETO" Role="USUARIO_PROJETO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USUARIO">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="USUARIO_PROJETO">
+              <PropertyRef Name="ID_USUARIO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="CONTROLEModelStoreContainer" CdmEntityContainer="CONTROLEEEntities">
+          <EntitySetMapping Name="ASSUNTO_SUPORTE">
+            <EntityTypeMapping TypeName="CONTROLEModel.ASSUNTO_SUPORTE">
+              <MappingFragment StoreEntitySet="ASSUNTO_SUPORTE">
+                <ScalarProperty Name="DATA" ColumnName="DATA" />
+                <ScalarProperty Name="LINK_VIDEO" ColumnName="LINK_VIDEO" />
+                <ScalarProperty Name="LINK_MANUAL" ColumnName="LINK_MANUAL" />
+                <ScalarProperty Name="DESCRICAO" ColumnName="DESCRICAO" />
+                <ScalarProperty Name="ID_USUARIO" ColumnName="ID_USUARIO" />
+                <ScalarProperty Name="ID_CATEGORIA" ColumnName="ID_CATEGORIA" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CATEGORIA_SUPORTE">
+            <EntityTypeMapping TypeName="CONTROLEModel.CATEGORIA_SUPORTE">
+              <MappingFragment StoreEntitySet="CATEGORIA_SUPORTE">
+                <ScalarProperty Name="DESCRICAO" ColumnName="DESCRICAO" />
+                <ScalarProperty Name="ID_PROJETO" ColumnName="ID_PROJETO" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EMAIL_CLIENTE">
+            <EntityTypeMapping TypeName="CONTROLEModel.EMAIL_CLIENTE">
+              <MappingFragment StoreEntitySet="EMAIL_CLIENTE">
+                <ScalarProperty Name="PRINCIPAL" ColumnName="PRINCIPAL" />
+                <ScalarProperty Name="EMAIL" ColumnName="EMAIL" />
+                <ScalarProperty Name="ID_CLIENTE" ColumnName="ID_CLIENTE" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EMPRESA">
+            <EntityTypeMapping TypeName="CONTROLEModel.EMPRESA">
+              <MappingFragment StoreEntitySet="EMPRESA">
+                <ScalarProperty Name="CEP" ColumnName="CEP" />
+                <ScalarProperty Name="ESTADO" ColumnName="ESTADO" />
+                <ScalarProperty Name="CIDADE" ColumnName="CIDADE" />
+                <ScalarProperty Name="BAIRRO" ColumnName="BAIRRO" />
+                <ScalarProperty Name="NUMERO" ColumnName="NUMERO" />
+                <ScalarProperty Name="ENDERECO" ColumnName="ENDERECO" />
+                <ScalarProperty Name="TELEFONE" ColumnName="TELEFONE" />
+                <ScalarProperty Name="CELULAR" ColumnName="CELULAR" />
+                <ScalarProperty Name="EMAIL" ColumnName="EMAIL" />
+                <ScalarProperty Name="CPFCNPJ" ColumnName="CPFCNPJ" />
+                <ScalarProperty Name="NOME" ColumnName="NOME" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GRUPO">
+            <EntityTypeMapping TypeName="CONTROLEModel.GRUPO">
+              <MappingFragment StoreEntitySet="GRUPO">
+                <ScalarProperty Name="DESCRICAO" ColumnName="DESCRICAO" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HISTORICO_SUPORTE">
+            <EntityTypeMapping TypeName="CONTROLEModel.HISTORICO_SUPORTE">
+              <MappingFragment StoreEntitySet="HISTORICO_SUPORTE">
+                <ScalarProperty Name="ID_CLIENTE" ColumnName="ID_CLIENTE" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HISTORICO_SUPORTE_ITENS">
+            <EntityTypeMapping TypeName="CONTROLEModel.HISTORICO_SUPORTE_ITENS">
+              <MappingFragment StoreEntitySet="HISTORICO_SUPORTE_ITENS">
+                <ScalarProperty Name="ID_CATEGORIA_SUPORTE" ColumnName="ID_CATEGORIA_SUPORTE" />
+                <ScalarProperty Name="OBSERVACAO" ColumnName="OBSERVACAO" />
+                <ScalarProperty Name="DATA" ColumnName="DATA" />
+                <ScalarProperty Name="CLINICA_CLIENTE" ColumnName="CLINICA_CLIENTE" />
+                <ScalarProperty Name="NOME_CLIENTE" ColumnName="NOME_CLIENTE" />
+                <ScalarProperty Name="ID_USUARIO" ColumnName="ID_USUARIO" />
+                <ScalarProperty Name="ID_ASSUNTO_SUPORTE" ColumnName="ID_ASSUNTO_SUPORTE" />
+                <ScalarProperty Name="ID_HISTORICO_SUPORTE" ColumnName="ID_HISTORICO_SUPORTE" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PROJETO">
+            <EntityTypeMapping TypeName="CONTROLEModel.PROJETO">
+              <MappingFragment StoreEntitySet="PROJETO">
+                <ScalarProperty Name="DATA" ColumnName="DATA" />
+                <ScalarProperty Name="DESCRICAO" ColumnName="DESCRICAO" />
+                <ScalarProperty Name="ID_EMPRESA" ColumnName="ID_EMPRESA" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TELEFONE_CLIENTE">
+            <EntityTypeMapping TypeName="CONTROLEModel.TELEFONE_CLIENTE">
+              <MappingFragment StoreEntitySet="TELEFONE_CLIENTE">
+                <ScalarProperty Name="PRINCIPAL" ColumnName="PRINCIPAL" />
+                <ScalarProperty Name="RESPONSAVEL" ColumnName="RESPONSAVEL" />
+                <ScalarProperty Name="TELEFONE" ColumnName="TELEFONE" />
+                <ScalarProperty Name="ID_CLIENTE" ColumnName="ID_CLIENTE" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="USUARIO_PROJETO">
+            <EntityTypeMapping TypeName="CONTROLEModel.USUARIO_PROJETO">
+              <MappingFragment StoreEntitySet="USUARIO_PROJETO">
+                <ScalarProperty Name="ID_PROJETO" ColumnName="ID_PROJETO" />
+                <ScalarProperty Name="ID_USUARIO" ColumnName="ID_USUARIO" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CLIENTE">
+            <EntityTypeMapping TypeName="CONTROLEModel.CLIENTE">
+              <MappingFragment StoreEntitySet="CLIENTE">
+                <ScalarProperty Name="CONTATO" ColumnName="CONTATO" />
+                <ScalarProperty Name="CEP" ColumnName="CEP" />
+                <ScalarProperty Name="ESTADO" ColumnName="ESTADO" />
+                <ScalarProperty Name="CIDADE" ColumnName="CIDADE" />
+                <ScalarProperty Name="BAIRRO" ColumnName="BAIRRO" />
+                <ScalarProperty Name="NUMERO" ColumnName="NUMERO" />
+                <ScalarProperty Name="ENDERECO" ColumnName="ENDERECO" />
+                <ScalarProperty Name="EMAIL" ColumnName="EMAIL" />
+                <ScalarProperty Name="NOME_FANTASIA" ColumnName="NOME_FANTASIA" />
+                <ScalarProperty Name="CPFCNPJ" ColumnName="CPFCNPJ" />
+                <ScalarProperty Name="RAZAOSOCIAL" ColumnName="RAZAOSOCIAL" />
+                <ScalarProperty Name="ID_PROJETO" ColumnName="ID_PROJETO" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="USUARIO">
+            <EntityTypeMapping TypeName="CONTROLEModel.USUARIO">
+              <MappingFragment StoreEntitySet="USUARIO">
+                <ScalarProperty Name="EMAIL" ColumnName="EMAIL" />
+                <ScalarProperty Name="SUPERVISOR" ColumnName="SUPERVISOR" />
+                <ScalarProperty Name="SENHA" ColumnName="SENHA" />
+                <ScalarProperty Name="LOGINN" ColumnName="LOGINN" />
+                <ScalarProperty Name="ID_GRUPO" ColumnName="ID_GRUPO" />
+                <ScalarProperty Name="ID_EMPRESA" ColumnName="ID_EMPRESA" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
